@@ -5,20 +5,42 @@ const app = express();
 
 
 
+//middleware
+app.use(express.static('public'))
+
 
 
 app.get('/', (req, res) => {
 
-	petfinder.getBreedList('dog', function(err, breeds) {
-	  	console.log(breeds)
 
-	  	res.send('ur shit posted');
-	});
+
+	petfinder.findShelter('Chicago', (err, shelters) => {
+
+		console.log(shelters);
+
+		res.render(shelters)
+	})
+
+
+
+
+
+
+
+	// petfinder.getRandomPet({}, (err, pet) => {
+	//   	console.log(pet)
+
+	//   	res.render('index.ejs', {
+	//   		pic: pet.media.photos['1'].x
+	//   	});
+	// });
 })
 
 
 
-
+app.get('/pets', (req, res) => {
+	res.render('index.ejs')
+})
 
 
 
