@@ -1,0 +1,23 @@
+{
+  "name": "project-2-crud-pet-app",
+  "version": "1.0.0",
+  "description": "This repo is a full CRUD app using the Petfinder API",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rynelaster/Project-2-CRUD-Pet-App.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rynelaster/Project-2-CRUD-Pet-App/issues"
+  },
+  "homepage": "https://github.com/rynelaster/Project-2-CRUD-Pet-App#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "petfinder": "^0.1.1"
+  }
+}
