@@ -18,7 +18,6 @@
   "homepage": "https://github.com/rynelaster/Project-2-CRUD-Pet-App#readme",
   "dependencies": {
     "ejs": "^2.5.7",
-    "express": "^4.16.2",
-    "petfinder": "^0.1.1"
+    "express": "^4.16.2"
   }
 }
