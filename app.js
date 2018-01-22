@@ -23,56 +23,39 @@ app.use(bodyParser.urlencoded({
 }));
 
 
-//controllers
+//controllers & models
 const userController = require('./controllers/userController.js');
 app.use('/user', userController);
+
+// const savedPetsController = require('./controllers/savedPetsController');
+// app.use('/saved', savedPetsController);
 
 
 
 app.get('/', (req, res) => {
 
-	res.send('the root');
-})
-
-
-
-app.get('/showpet', (req, res) => {
-
 	request('http://api.petfinder.com/pet.getRandom?format=json&key=4514687905f37186817bdb9967ab8c9f&output=basic', (err, response, body) => {
 		if (err) {
+
 			console.error(err);
 		}
 		else {
 
 			let json = JSON.parse(body);
+			
+			res.render('home.ejs', {
 
-			res.render('showPet.ejs', {
-
-				data: json
+				data: json.petfinder.pet
 			})
 		}
 	})
-
-
-	// res.render('showPet.ejs');
 })
 
 
+app.get('/shelter', (req, res) => {
 
-app.get('/showpet/:id', (req, res) => {
-
-	res.render('showPet.ejs', {
-
-	})
+	res.render('showShelter.ejs');
 })
-
-
-
-app.get('/showshelter', (req, res) => {
-
-	res.render('showShelter.ejs')
-})
-
 
 
 app.get('*', (req, res) => {

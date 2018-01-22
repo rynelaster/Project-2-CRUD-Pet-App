@@ -28,6 +28,7 @@ $.ajax({
 
 		// console.log(data, ' this is data')
 		petSnapshot(data);
+		console.log(data);
 	},
 	error: function(err){
 
