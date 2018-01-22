@@ -4,25 +4,14 @@
 	<meta charset="utf-8">
 	<title>Welcome to pet adoption central</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Boogaloo" rel="stylesheet">
 </head>
 <body>
 
-<header>
-	<nav class="nav-container">
-		<ul class="left-aligned-header">
-			<li> <a href="/">ooga</a> </li>
-			<li> <a href="/">booga</a> </li>
-			<li> <a href="/">googa</a> </li>
-		</ul>
-		<ul class="right-aligned-header">
-			<li><a href="/">zongo</a></li>
-			<li><a href="/">bongo</a></li>
-		</ul>
-	</nav>
-	<h1>Adoption Finder Website</h1>
-</header>
+<% include ./partials/header.ejs%>
 
 <main>
+
 	<div class="splash-container-bg" style="background-image: url(
 	<% let xPhotos = [];%>
 	<% for (let i = 0; i < data.media.photos.photo.length; i++) { -%>
@@ -33,20 +22,33 @@
 	<% let bgrandomize = Math.floor(Math.random() * xPhotos.length) %>
 	<% if (bgrandomize == 0 && xPhotos.length > 1) { bgrandomize = 1 } %>
 	<%= xPhotos[bgrandomize] %>)">
+
 	<div class="splash-container">
-		<div class="button-overlay" style="background-image: url(<%= data.media.photos.photo[2].$t %>)">
-			<div class="find-button-container">
-				<div class="splash-button">left</div>
-				<div class="splash-button">right</div>
-			</div>
+
+		<img class="image-overlay" src=" <%= data.media.photos.photo[2].$t %> ">
+
+		<div class="location-form">
+			<form action="/search" method="GET">
+				<input type="text" name="location" placeholder="Enter City, State, or ZIP Code">
+				<button>Begin your search!</button>
+			</form>
 		</div>
+
 	</div>
+
 	</div>
+
 </main>
+
 <aside>
+
 	<div class="randomized-pet-info-container">
-		<p class="randomized-pet">This completely randomized pet's name is <%= data.name.$t %>! <% if (data.sex.$t == 'M') { %> He<% } else { %> She<% } %>'s <% if (data.age.$t == 'Adult') { %> an <% } else { %> a <% } %> <%= data.age.$t.toLowerCase() %> <%= data.animal.$t.toLowerCase() %> waiting to be adopted in <%= data.contact.state.$t %>. <a href="/viewpet/<%= data.id.$t %>">Click here to learn more about <%= data.name.$t %> </a></p>
+
+		<p class="randomized-pet">This completely randomized pet's name is <%= data.name.$t %>! <% if (data.sex.$t == 'M') { %> He<% } else { %> She<% } %>'s <% if (data.age.$t == 'Adult') { %> an <% } else { %> a <% } %> <%= data.age.$t.toLowerCase() %> <%= data.animal.$t.toLowerCase() %> waiting to be adopted in <%= data.contact.state.$t %>. <a href="/view/pet/<%= data.id.$t %>">Click here to learn more about <%= data.name.$t %> </a> - This pet last updated 
+			<%= Date(data.lastUpdate.$t) %></p>
+
 	</div>
+
 </aside>
 
 <footer>

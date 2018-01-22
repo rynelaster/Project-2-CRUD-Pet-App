@@ -1,11 +1,12 @@
-* {
+/** {
 	border: 1px solid black;
-}
+}*/
 body {
 	margin: 0;
+	font-family: 'Boogaloo', cursive;
 }
 
-/* home.ejs */
+
 /* header */
 nav ul {
 	list-style: none;
@@ -32,7 +33,7 @@ h1 {
 	margin-right: 20px;
 }
 
-/* main */
+/* home.ejs */
 .splash-container {
 	z-index: -1;
 	height: 400px;
@@ -44,24 +45,16 @@ h1 {
 	z-index: 1;
 	background-size: initial;
 }
-.button-overlay {
-	display: flex;
-	justify-content: flex-end;
-	flex-direction: column;
-	width: 500px;
-	background-size: contain;	
-	background-color: black;
+.image-overlay {
+	height: 100%;
 }
-.find-button-container {
-	display: flex;
-	justify-content: space-between;
-}
-.splash-button {
-	margin: 20px;
-	width: 120px;
-	height: 120px;
-	border-radius: 60px;
-	background-color: lightseagreen;
+.location-form {
+	padding: 20px;
+	border-radius: 50px;
+	background-color: peachpuff;
+	position: absolute;
+	top: 380px;
+	left: 575px;
 }
 .randomized-pet {
 	text-align: center;

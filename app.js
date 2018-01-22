@@ -42,13 +42,19 @@ app.get('/', (req, res) => {
 		else {
 
 			let json = JSON.parse(body);
-			
+
 			res.render('home.ejs', {
 
 				data: json.petfinder.pet
 			})
 		}
 	})
+})
+
+
+app.get('/search', (req, res) => {
+
+	res.render('search.ejs');
 })
 
 
