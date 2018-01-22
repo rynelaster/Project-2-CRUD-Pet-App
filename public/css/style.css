@@ -1,3 +1,16 @@
 * {
 	border: 1px solid black;
 }
+#pet-listings {
+	margin: 0 auto;
+	text-align: center;
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	width: 600px;
+
+}
+.listings {
+	margin: 10px;
+	text-align: center;
+}

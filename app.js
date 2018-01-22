@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const request = require('request');
 
 require('./db/db.js');
 
@@ -37,7 +38,32 @@ app.get('/', (req, res) => {
 
 app.get('/showpet', (req, res) => {
 
-	res.render('showPet.ejs');
+	request('http://api.petfinder.com/pet.getRandom?format=json&key=4514687905f37186817bdb9967ab8c9f&output=basic', (err, response, body) => {
+		if (err) {
+			console.error(err);
+		}
+		else {
+
+			let json = JSON.parse(body);
+
+			res.render('showPet.ejs', {
+
+				data: json
+			})
+		}
+	})
+
+
+	// res.render('showPet.ejs');
+})
+
+
+
+app.get('/showpet/:id', (req, res) => {
+
+	res.render('showPet.ejs', {
+
+	})
 })
 
 
