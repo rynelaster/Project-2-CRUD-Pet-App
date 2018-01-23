@@ -16,6 +16,7 @@
 
 	<form action="/results/search" method="POST">
 		<input type="hidden" name="location" value="<%= location %>">
+		<input type="hidden" name="animal" value="<%= animal %>">
 		Breed: <select name="breed">
 			<option>All</option>
 			<% for (let i = 0; i < breeds.length; i++) { -%>

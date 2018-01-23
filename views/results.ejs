@@ -9,7 +9,7 @@
 <body>
 
 <% include ./partials/header.ejs %>
-<a class="direct-search" href="/search">adjust your search</a>
+
 <div class="results-container">
 
 	<% if (pets.length > 0) { %>
@@ -22,15 +22,27 @@
 
 					<div class="result-thumb">
 
-					<% for (let j = 0; j < pets[i].media.photos.photo.length; j++) { -%>
+						<% if (pets[i].media.photos != undefined) { %>
 
-						<% if (pets[i].media.photos.photo[0].$t != undefined && pets[i].media.photos.photo[j]['@size'] == 'pn' && pets[i].media.photos.photo[j]['@id'] == 1) { %>
+							<% for (let j = 0; j < pets[i].media.photos.photo.length; j++) { -%>
 
-							<img src="<%= pets[i].media.photos.photo[j].$t %>">
+								<% if (pets[i].media.photos.photo[0].$t != undefined && pets[i].media.photos.photo[j]['@size'] == 'pn' && pets[i].media.photos.photo[j]['@id'] == 1) { %>
+
+									<img src="<%= pets[i].media.photos.photo[j].$t %>">
+
+								<% } %>
+
+							<% } -%>
+
+						<% } else if (pets[i].media.photos == undefined && pets[i].animal.$t == 'Dog') { %>
+
+							<img src="/img/defaultdog.png">
+
+						<% } else { %>
+
+							<img src="/img/defaultcat.png">
 
 						<% } %>
-
-					<% } -%>
 
 					</div>
 			
