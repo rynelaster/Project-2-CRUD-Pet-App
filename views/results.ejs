@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>search results</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Boogaloo" rel="stylesheet">
+</head>
+<body>
+
+<% include ./partials/header.ejs %>
+
+<div class="results-container">
+
+	<% if (pets.length > 0) { %>
+
+		<% for (let i = 0; i < pets.length; i++) { -%>
+
+		<div class="results">
+
+			<div class="result-thumb">
+
+			<% for (let j = 0; j < pets[i].media.photos.photo.length; j++) { -%>
+
+				<% if (pets[i].media.photos.photo[0].$t != undefined && pets[i].media.photos.photo[j]['@size'] == 'pn' && pets[i].media.photos.photo[j]['@id'] == 1) { %>
+
+					<img src="<%= pets[i].media.photos.photo[j].$t %>">
+
+				<% } %>
+
+			<% } -%>
+
+			</div>
+	
+			<div class="results-detail">
+
+				<div class="results-name"><%= pets[i].name.$t %></div>
+
+				<div class="results-age-gender"> 
+
+					<%= pets[i].age.$t %>, <% if (pets[i].sex.$t == 'm') { %> Male <% } else { %> Female <% } %>
+					
+				</div>
+
+				<div class="breed"> 
+
+				<% if (Array.isArray(pets[i].breeds.breed) == true) { %> 
+
+					<% for (let k = 0; k < pets[i].breeds.breed.length; k++) { -%>
+
+						<%= pets[i].breeds.breed[k].$t %><% if (k < pets[i].breeds.breed.length - 1) { %>, <% } %>
+
+					<% } -%>
+
+				<% } else { %>
+
+					<%= pets[i].breeds.breed.$t %>
+
+				<% } %>
+
+				</div>
+			</div>
+		</div>	
+		<% } -%>
+	<% } %>
+</div>
+
+
+</body>
+</html>

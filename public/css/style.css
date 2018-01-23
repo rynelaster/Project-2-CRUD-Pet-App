@@ -1,6 +1,6 @@
-/** {
+* {
 	border: 1px solid black;
-}*/
+}
 body {
 	margin: 0;
 	font-family: 'Boogaloo', cursive;
@@ -48,20 +48,62 @@ h1 {
 .image-overlay {
 	height: 100%;
 }
-.location-form {
-	padding: 20px;
-	border-radius: 50px;
+.animal-options {
+	font-size: 32px;
+	padding: 10px;
+	border-radius: 20px;
 	background-color: peachpuff;
 	position: absolute;
 	top: 380px;
-	left: 575px;
+	left: 585px;
+	display: flex;
+	justify-content: space-between;
+	width: 250px;
 }
 .randomized-pet {
 	text-align: center;
 }
 
+/* search */
+.search-form {
+	margin: 0 auto;
+	text-align: center;
+}
 
-
+/* results */
+.results-container {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 auto;
+	margin-top: 20px;
+	height: 700px;
+	width: 1000px;
+	overflow-y: scroll;
+	box-shadow: 1px 1px 7px;
+}
+.results {
+	display: flex;
+	justify-content: flex-start;
+	width: 450px;
+	margin: 10px;
+	/*border: 1px solid black;*/
+}
+.results-detail {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	overflow: hidden;
+	text-decoration: underline;
+}
+.result-thumb {
+	height: 150px;
+}
+.result-thumb img {
+	height: 100%;
+}
+.results-name {
+	font-size: 56px;
+}
 
 
 #pet-listings {

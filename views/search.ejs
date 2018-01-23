@@ -10,20 +10,47 @@
 
 <% include ./partials/header.ejs %>
 
+<div class="search-form">
+
 <h2>Search Animal By:</h2>
 
-<form action="/search/" method="GET">
+	<form action="/results/search" method="POST">
 
-	Species: <select name="animal">
-		<option>All</option>
-		<option>Cat</option>
-		<option>Dog</option>
-		<option>Other</option>
-	</select>
+		Enter your ZIP: <input type="text" name="location" placeholder="REQUIRED">
 
-	Breed: 
-</form>
+		Breed: <select name="breed">
+			<option>All</option>
+			<% for (let i = 0; i < breeds.length; i++) { -%>
+				<option value="<%= breeds[i].$t %>"> <%= breeds[i].$t %> </option>
+			<% } -%>
+		</select>
 
+		Size: <select name="size">
+			<option value="All">All</option>
+			<option value="S">Small</option>
+			<option value="M">Medium</option>
+			<option value="L">Large</option>
+			<option value="XL">X-Large</option>
+		</select>
+
+		Gender: <select name="sex">
+			<option value="All">All</option>
+			<option value="M">Male</option>
+			<option value="F">Female</option>
+		</select>
+
+		Age: <select name="age">
+			<option value="All">All</option>
+			<option value="Baby">Baby</option>
+			<option value="Young">Young</option>
+			<option value="Adult">Adult</option>
+			<option value="Senior">Senior</option>
+		</select>
+
+		<button>Search!</button>
+
+	</form>
+</div>
 
 </body>
 </html>

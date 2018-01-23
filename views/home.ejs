@@ -27,11 +27,10 @@
 
 		<img class="image-overlay" src=" <%= data.media.photos.photo[2].$t %> ">
 
-		<div class="location-form">
-			<form action="/search" method="GET">
-				<input type="text" name="location" placeholder="Enter City, State, or ZIP Code">
-				<button>Begin your search!</button>
-			</form>
+		<div class="animal-options">
+			<a href="/search/dog">Dogs</a>
+			<a href="/search/cat">Cats</a>
+			<a href="/search">All</a>
 		</div>
 
 	</div>
