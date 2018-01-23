@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Register Your Account</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Boogaloo" rel="stylesheet">
+</head>
+<body>
+	<% include ./partials/header.ejs%>
+
+	<form action="/users/registration" method="post">
+		<input type="text" placeholder="Username" name="username">
+		<input type="password" placeholder="password" name="password">
+		<button>Submit</button>
+
+	</form>
+
+</body>
+</html>

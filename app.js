@@ -3,6 +3,7 @@ const app = express();
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const request = require('request');
+const methodOverride = require('method-override')
 
 require('./db/db.js');
 
@@ -21,6 +22,7 @@ app.use(session({
 app.use(bodyParser.urlencoded({
 	extended: false
 }));
+app.use(methodOverride('_method'))
 
 
 //controllers & models
