@@ -144,11 +144,22 @@ app.post('/search', (req, res) => {
 
 
 
-//  /view/pet/id
-app.get('/view/pet/:id'(req, res)=>{
+//  Route for showing animals when clicked on from SRP(search results page)
+app.get('/view/pet/:id', (req, res)=>{
 
-	res.render('showPet.ejs');
-})
+	request('http://api.petfinder.com/pet.get?format=json&key=4514687905f37186817bdb9967ab8c9f&id=' + req.params.id,(err, response, foundAnimal)=>{
+
+		let json = JSON.parse(foundAnimal);
+		console.log(json);
+	
+
+
+		res.render('showPet.ejs', {
+			data: json.petfinder.pet})
+	})
+});
+
+
 
 app.get('/shelter', (req, res) => {
 
