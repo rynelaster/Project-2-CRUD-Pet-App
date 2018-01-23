@@ -30,7 +30,7 @@ const userController = require('./controllers/userController.js');
 app.use('/user', userController);
 
 // const savedPetsController = require('./controllers/savedPetsController');
-// app.use('/saved', savedPetsController);
+// app.use('/savedpets', savedPetsController);
 
 
 
@@ -57,6 +57,60 @@ app.get('/', (req, res) => {
 app.get('/search', (req, res) => {
 
 	res.render('search.ejs');
+})
+
+
+app.post('/results/search', (req, res) => {
+
+	let searchObj = req.body;
+
+	let searchStr = '';
+
+	for (let key in searchObj) {
+		if (searchObj[key] != 'All' && searchObj[key] != '') {
+
+			searchStr += '&' + key + '=' + searchObj[key]
+		}
+	}
+
+	console.log(searchStr);
+
+	request('http://api.petfinder.com/pet.find?format=json&key=4514687905f37186817bdb9967ab8c9f' + searchStr, (err, response, foundPets) => {
+
+		let json = JSON.parse(foundPets)
+
+		console.log(json.petfinder.pets.pet[0])
+
+		// res.send(json)
+		res.render('results.ejs', {
+
+			pets: json.petfinder.pets.pet
+		})
+
+	})
+
+})
+
+
+app.get('/search/:id', (req, res) => {
+
+	let species = req.params.id;
+
+	request('http://api.petfinder.com/breed.list?format=json&key=4514687905f37186817bdb9967ab8c9f&animal='+ species, (err, response, foundBreeds) => {
+		if (err) {
+
+			console.error(err);
+		}
+		else {
+
+			let json = JSON.parse(foundBreeds);
+
+			res.render('search.ejs', {
+
+				breeds: json.petfinder.breeds.breed
+			})
+		}
+	})
 })
 
 
