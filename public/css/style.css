@@ -87,6 +87,9 @@ h1 {
 	width: 450px;
 	margin: 15px 20px 0px 24px;
 	border: 1px solid black;
+	background-image: url('../img/resultsbg.jpg');
+	background-size: cover;
+	color: black;
 }
 .results-detail {
 	display: flex;

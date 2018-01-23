@@ -16,57 +16,60 @@
 
 		<% for (let i = 0; i < pets.length; i++) { -%>
 
-		<div class="results">
+			<div >
 
-			<div class="result-thumb">
+				<a class="results" href="/view/pet/<%= pets[i].id.$t %>">
 
-			<% for (let j = 0; j < pets[i].media.photos.photo.length; j++) { -%>
+					<div class="result-thumb">
 
-				<% if (pets[i].media.photos.photo[0].$t != undefined && pets[i].media.photos.photo[j]['@size'] == 'pn' && pets[i].media.photos.photo[j]['@id'] == 1) { %>
+					<% for (let j = 0; j < pets[i].media.photos.photo.length; j++) { -%>
 
-					<img src="<%= pets[i].media.photos.photo[j].$t %>">
+						<% if (pets[i].media.photos.photo[0].$t != undefined && pets[i].media.photos.photo[j]['@size'] == 'pn' && pets[i].media.photos.photo[j]['@id'] == 1) { %>
 
-				<% } %>
+							<img src="<%= pets[i].media.photos.photo[j].$t %>">
 
-			<% } -%>
-
-			</div>
-	
-			<div class="results-detail">
-
-				<div class="results-name"><%= pets[i].name.$t %></div>
-
-				<div class="results-age-gender"> 
-
-					<%= pets[i].age.$t %>, <% if (pets[i].sex.$t == 'm') { %> Male <% } else { %> Female <% } %>
-					
-				</div>
-
-				<div class="breed"> 
-
-				<% if (Array.isArray(pets[i].breeds.breed) == true) { %> 
-
-					<% for (let k = 0; k < pets[i].breeds.breed.length; k++) { -%>
-
-						<%= pets[i].breeds.breed[k].$t %><% if (k < pets[i].breeds.breed.length - 1) { %>, <% } %>
+						<% } %>
 
 					<% } -%>
 
-				<% } else { %>
+					</div>
+			
+					<div class="results-detail">
 
-					<%= pets[i].breeds.breed.$t %>
+						<div class="results-name"><%= pets[i].name.$t %></div>
 
-				<% } %>
+						<div class="results-age-gender"> 
 
-				</div>
+							<%= pets[i].age.$t %>, <% if (pets[i].sex.$t == 'm') { %> Male <% } else { %> Female <% } %>
+							
+						</div>
 
-				<div class="results-last-update">
-					
-					Last updated: <%= pets[i].lastUpdate.$t.slice(0, 9) %>
+						<div class="breed"> 
 
-				</div>
+						<% if (Array.isArray(pets[i].breeds.breed) == true) { %> 
+
+							<% for (let k = 0; k < pets[i].breeds.breed.length; k++) { -%>
+
+								<%= pets[i].breeds.breed[k].$t %><% if (k < pets[i].breeds.breed.length - 1) { %>, <% } %>
+
+							<% } -%>
+
+						<% } else { %>
+
+							<%= pets[i].breeds.breed.$t %>
+
+						<% } %>
+
+						</div>
+
+						<div class="results-last-update">
+							
+							Last updated: <%= pets[i].lastUpdate.$t.slice(0, 9) %>
+
+						</div>
+					</div>
+				</a>
 			</div>
-		</div>	
 		<% } -%>
 	<% } %>
 </div>
