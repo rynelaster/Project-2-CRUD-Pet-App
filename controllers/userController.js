@@ -5,19 +5,25 @@ const User = require('../models/users.js');
 
 //remember to require the Model here
 
-router.route('/login')
-	.get((req, res) => {
+// router.route('/login')
+// 	.get((req, res) => {
 
-		res.send('log in fam');
-	})
-
-
+// 		res.send('log in fam');
+// 	})
 
 
-// LOGIN ROUTE
-router.get('/login', (req, res) =>{
-	res.render('/login.ejs', (req, res)=>{
-		User.findOne({username: req.body.username}, (err, user)=>{
+
+
+// // LOGIN ROUTE
+// router.get('/login', (req, res) =>{
+// 	res.render('/login.ejs', (req, res)=>{
+// 		User.findOne({username: req.body.username}, (err, user)=>{
+router.get('/login', (req, res)=>{
+	res.render('login.ejs', {message: req.session.message})
+})
+
+router.post('/login', (req, res)=>{
+	User.findOne({username: req.body.username}, (err, user)=>{
 
 			if(user){
 
@@ -26,7 +32,7 @@ router.get('/login', (req, res) =>{
 					req.session.logged= true,
 					req.session.message = '';
 
-					res.redirect('/home')
+					res.redirect('/')
 
 				}else{
 					req.session.message = "Username or Password are incorrect"
@@ -37,8 +43,7 @@ router.get('/login', (req, res) =>{
 				console.log(err, 'there was an error')
 				req.session.message = "Username or Password are incorrect"
 				res.redirect('/users/login')
-			}
-		})
+		}
 	})
 })
 
@@ -46,12 +51,13 @@ router.get('/login', (req, res) =>{
 
 router.get('/registration', (req, res)=>{
 	console.log(req.session)
+	res.render('registration.ejs')
 })
 
 router.post('/registration', (req, res)=>{
 
 	const password = req.body.password;
-	const passwordHash = bcrypt.hashSync(password, bcrypt.getSaltSync(10));
+	const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 
 	// Creating an entry for our db with the password hash
 

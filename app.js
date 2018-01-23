@@ -27,7 +27,7 @@ app.use(methodOverride('_method'))
 
 //controllers & models
 const userController = require('./controllers/userController.js');
-app.use('/user', userController);
+app.use('/users', userController);
 
 // const savedPetsController = require('./controllers/savedPetsController');
 // app.use('/savedpets', savedPetsController);
