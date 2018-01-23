@@ -27,12 +27,6 @@
 
 		<img class="image-overlay" src=" <%= data.media.photos.photo[2].$t %> ">
 
-		<div class="animal-options">
-			<a href="/search/dog">Dogs</a>
-			<a href="/search/cat">Cats</a>
-			<a href="/search">All</a>
-		</div>
-
 	</div>
 
 	</div>
@@ -43,11 +37,23 @@
 
 	<div class="randomized-pet-info-container">
 
-		<p class="randomized-pet">This completely randomized pet's name is <%= data.name.$t %>! <% if (data.sex.$t == 'M') { %> He<% } else { %> She<% } %>'s <% if (data.age.$t == 'Adult') { %> an <% } else { %> a <% } %> <%= data.age.$t.toLowerCase() %> <%= data.animal.$t.toLowerCase() %> waiting to be adopted in <%= data.contact.state.$t %>. <a href="/view/pet/<%= data.id.$t %>">Click here to learn more about <%= data.name.$t %> </a> - This pet last updated 
-			<%= Date(data.lastUpdate.$t) %></p>
+		<p class="randomized-pet">This randomized pet's name is <%= data.name.$t %>! <% if (data.sex.$t == 'M') { %> He<% } else { %> She<% } %>'s <% if (data.age.$t == 'Adult') { %> an <% } else { %> a <% } %> <%= data.age.$t.toLowerCase() %> <%= data.animal.$t.toLowerCase() %> waiting to be adopted in <%= data.contact.state.$t %>. <a href="/view/pet/<%= data.id.$t %>">Click here to learn more about <%= data.name.$t %> </a> - This pet last updated 
+			<%= data.lastUpdate.$t.slice(0, 9) %></p>
 
 	</div>
 
+</aside>
+
+<aside class="home-search">
+	<form action="/search" method="POST">
+		Enter your ZIP: <input type="text" name="location" placeholder="REQUIRED">
+		<select name="animal">
+			<option>All</option>
+			<option value="dog">Dogs</option>
+			<option value="cat">Cats</option>
+		</select> <br>
+		<button>Begin your search</button>
+	</form>
 </aside>
 
 <footer>

@@ -54,12 +54,6 @@ app.get('/', (req, res) => {
 })
 
 
-app.get('/search', (req, res) => {
-
-	res.render('search.ejs');
-})
-
-
 app.post('/results/search', (req, res) => {
 
 	let searchObj = req.body;
@@ -79,7 +73,11 @@ app.post('/results/search', (req, res) => {
 
 		let json = JSON.parse(foundPets)
 
-		console.log(json.petfinder.pets.pet[0])
+		// for (let i = 0; i < json.petfinder.pets.pet.length; i++) {
+
+		// }
+
+		// console.log(json.petfinder.pets.pet[0])
 
 		// res.send(json)
 		res.render('results.ejs', {
@@ -92,25 +90,38 @@ app.post('/results/search', (req, res) => {
 })
 
 
-app.get('/search/:id', (req, res) => {
+app.post('/search', (req, res) => {
 
-	let species = req.params.id;
+	let location = req.body.location
 
-	request('http://api.petfinder.com/breed.list?format=json&key=4514687905f37186817bdb9967ab8c9f&animal='+ species, (err, response, foundBreeds) => {
-		if (err) {
+	if (req.body.animal != 'All') {
 
-			console.error(err);
-		}
-		else {
+		let species = req.body.animal;
 
-			let json = JSON.parse(foundBreeds);
+		request('http://api.petfinder.com/breed.list?format=json&key=4514687905f37186817bdb9967ab8c9f&animal='+ species, (err, response, foundBreeds) => {
+			if (err) {
 
-			res.render('search.ejs', {
+				console.error(err);
+			}
+			else {
 
-				breeds: json.petfinder.breeds.breed
-			})
-		}
-	})
+				let json = JSON.parse(foundBreeds);
+
+				res.render('search.ejs', {
+
+					breeds: json.petfinder.breeds.breed,
+					location: location
+				})
+			}
+		})
+	}	
+	else {
+
+		res.render('searchall.ejs', {
+
+			location: location
+		});
+	}
 })
 
 
