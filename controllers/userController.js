@@ -47,6 +47,16 @@ router.post('/login', (req, res)=>{
 	})
 })
 
+// LOGOUT
+router.get('/logout', (req, res)=>{
+	req.session.destroy((err)=>{
+		if(err){
+
+		}else{
+			res.redirect('/home.ejs')
+		}
+	})
+})
 // REGISTRATION ROUTE
 
 router.get('/registration', (req, res)=>{

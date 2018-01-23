@@ -114,6 +114,13 @@ app.get('/search/:id', (req, res) => {
 })
 
 
+
+//  /view/pet/id
+app.get('/view/pet/:id'(req, res)=>{
+
+	res.render('showPet.ejs');
+})
+
 app.get('/shelter', (req, res) => {
 
 	res.render('showShelter.ejs');
