@@ -1,6 +1,6 @@
-* {
+/** {
 	border: 1px solid black;
-}
+}*/
 body {
 	margin: 0;
 	font-family: 'Boogaloo', cursive;
@@ -85,8 +85,8 @@ h1 {
 	display: flex;
 	justify-content: flex-start;
 	width: 450px;
-	margin: 10px;
-	/*border: 1px solid black;*/
+	margin: 15px 20px 0px 24px;
+	border: 1px solid black;
 }
 .results-detail {
 	display: flex;
@@ -94,6 +94,7 @@ h1 {
 	flex-direction: column;
 	overflow: hidden;
 	text-decoration: underline;
+	margin-left: 5px;
 }
 .result-thumb {
 	height: 150px;
@@ -102,7 +103,7 @@ h1 {
 	height: 100%;
 }
 .results-name {
-	font-size: 56px;
+	font-size: 46px;
 }
 
 
