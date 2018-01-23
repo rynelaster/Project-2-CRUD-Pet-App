@@ -9,7 +9,7 @@
 <body>
 
 <% include ./partials/header.ejs %>
-
+<a class="direct-search" href="/search">adjust your search</a>
 <div class="results-container">
 
 	<% if (pets.length > 0) { %>
@@ -64,7 +64,7 @@
 
 						<div class="results-last-update">
 							
-							Last updated: <%= pets[i].lastUpdate.$t.slice(0, 9) %>
+							Last updated: <%= pets[i].lastUpdate.$t.slice(0, 10) %>
 
 						</div>
 					</div>

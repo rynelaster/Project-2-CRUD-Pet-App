@@ -16,12 +16,6 @@
 
 	<form action="/results/search" method="POST">
 		<input type="hidden" name="location" value="<%= location %>">
-		Breed: <select name="breed">
-			<option>All</option>
-			<% for (let i = 0; i < breeds.length; i++) { -%>
-				<option value="<%= breeds[i].$t %>"> <%= breeds[i].$t %> </option>
-			<% } -%>
-		</select>
 
 		Size: <select name="size">
 			<option value="All">All</option>

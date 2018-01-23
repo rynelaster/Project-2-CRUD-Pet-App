@@ -34,6 +34,10 @@ app.use('/users', userController);
 
 
 
+//cache??
+let userLocation;
+
+
 app.get('/', (req, res) => {
 
 	request('http://api.petfinder.com/pet.getRandom?format=json&key=4514687905f37186817bdb9967ab8c9f&output=basic', (err, response, body) => {
@@ -51,12 +55,6 @@ app.get('/', (req, res) => {
 			})
 		}
 	})
-})
-
-
-app.get('/search', (req, res) => {
-
-	res.render('search.ejs');
 })
 
 
@@ -79,7 +77,11 @@ app.post('/results/search', (req, res) => {
 
 		let json = JSON.parse(foundPets)
 
-		console.log(json.petfinder.pets.pet[0])
+		// for (let i = 0; i < json.petfinder.pets.pet.length; i++) {
+
+		// }
+
+		// console.log(json.petfinder.pets.pet[0])
 
 		// res.send(json)
 		res.render('results.ejs', {
@@ -92,25 +94,52 @@ app.post('/results/search', (req, res) => {
 })
 
 
-app.get('/search/:id', (req, res) => {
+app.get('/search', (req, res) => {
+	console.log(userLocation);
+	if (userLocation) {
+		res.render('searchall.ejs', {
 
-	let species = req.params.id;
+			location: userLocation
+		})
+	}
+	else {
+		res.redirect('/');
+	}
+})
 
-	request('http://api.petfinder.com/breed.list?format=json&key=4514687905f37186817bdb9967ab8c9f&animal='+ species, (err, response, foundBreeds) => {
-		if (err) {
 
-			console.error(err);
-		}
-		else {
+app.post('/search', (req, res) => {
 
-			let json = JSON.parse(foundBreeds);
+	userLocation = req.body.location
 
-			res.render('search.ejs', {
+	if (req.body.animal != 'All') {
 
-				breeds: json.petfinder.breeds.breed
-			})
-		}
-	})
+		let species = req.body.animal;
+
+		request('http://api.petfinder.com/breed.list?format=json&key=4514687905f37186817bdb9967ab8c9f&animal='+ species, (err, response, foundBreeds) => {
+			if (err) {
+
+				console.error(err);
+			}
+			else {
+
+				let json = JSON.parse(foundBreeds);
+
+				res.render('search.ejs', {
+
+					breeds: json.petfinder.breeds.breed,
+					location: userLocation
+				})
+			}
+		})
+	}	
+	else {
+
+		res.render('searchall.ejs', {
+
+			location: userLocation
+		});
+	}
 })
 
 
