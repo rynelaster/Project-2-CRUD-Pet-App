@@ -190,6 +190,28 @@ input {
 	margin-bottom: 5px;
 }
 
+/*Show Pets Page */
+.pets-page {
+
+}
+
+.pet-photos-container {
+
+}
+
+.pets-info-container{
+
+}
+
+.pets-contact-container {
+
+}
+
+.hidden {
+	display: none;
+}
+
+
 
 /* header */
 #header {

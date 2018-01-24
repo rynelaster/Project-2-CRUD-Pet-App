@@ -3,23 +3,61 @@
 <head>
 	<title>show pet</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Boogaloo|Mogra" rel="stylesheet">
 </head>
 <body>
 
+<% include ./partials/header.ejs %>
 
-<%=data.contact.phone.$t%>
-<%=data.contact.address1.$t%>
-<%=data.contact.city.$t%>
-<%=data.contact.zip.$t%>
-<%=data.breeds.breed.$t%>
-<%=data.name.$t%>
-<%=data.id.$t%>
-<%=data.shelterId.$t%>
-<%=data.description.$t%>
+<div class="pets-page">
 
-<img class="image-overlay" src=" <%= data.media.photos.photo[2].$t %>">
+	<div class="pet-photos-container">
+
+		<% 
+		let photoNum = 0;
+		for (let i = 0; i < data.media.photos.photo.length; i++) { 
 
 
+			if (data.media.photos.photo[i]["@size"] === "x") {
 
+				%> 
+
+				<img class="image-overlay hidden" id="animal-photo-<%= photoNum %>" src="<%= data.media.photos.photo[i].$t %>">
+				<%
+				photoNum++
+
+			} // end if this is an x  
+
+		} // for 
+
+
+		%>
+	</div>
+
+	<button id="left">Previous</button>
+	<button id="right">Next</button>
+
+<div class="pet-info-container">
+	<%=data.breeds.breed.$t%>
+	<%=data.name.$t%>
+	<%=data.sex.$t%>
+	<%=data.id.$t%>
+	<%=data.shelterId.$t%>
+	<%=data.description.$t%>
+</div>
+
+<div class="pet-contact-container">
+	<%=data.contact.phone.$t%>
+	<%=data.contact.address1.$t%>
+	<%=data.contact.city.$t%>
+	<%=data.contact.zip.$t%>
+</div>
+
+</div>
+
+<% include ./partials/footer.ejs %>
+
+
+<script type="text/javascript" src="/js/showPhoto.js"></script>
 </body>
 </html>
