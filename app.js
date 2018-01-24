@@ -9,7 +9,6 @@ require('./db/db.js');
 
 
 
-
 //middleware
 app.use(express.static('public'))
 
@@ -25,24 +24,24 @@ app.use(bodyParser.urlencoded({
 app.use(methodOverride('_method'))
 
 
-//cache??
-let userLocation;
+
 
 //controllers & models
 const userController = require('./controllers/userController.js');
 app.use('/users', userController);
 
-// const savedPetsController = require('./controllers/savedPetsController');
-// app.use('/savedpets', savedPetsController);
+const savedPetsController = require('./controllers/savedPetsController');
+app.use('/savedpets', savedPetsController);
 
 
 
 
-
-
+//home page route
 app.get('/', (req, res) => {
 
 	console.log(req.session.location)
+
+	req.session.message = '';
 
 	request('http://api.petfinder.com/pet.getRandom?format=json&key=4514687905f37186817bdb9967ab8c9f&output=basic', (err, response, body) => {
 		if (err) {
@@ -69,7 +68,7 @@ app.post('/results/search', (req, res) => {
 
 	let searchObj = req.body;
 
-	let searchStr = '';
+	let searchStr = 'http://api.petfinder.com/pet.find?format=json&key=4514687905f37186817bdb9967ab8c9f';
 
 	for (let key in searchObj) {
 		if (searchObj[key] != 'All' && searchObj[key] != '') {
@@ -80,25 +79,43 @@ app.post('/results/search', (req, res) => {
 
 	console.log(searchStr);
 
-	request('http://api.petfinder.com/pet.find?format=json&key=4514687905f37186817bdb9967ab8c9f' + searchStr, (err, response, foundPets) => {
+	request(searchStr, (err, response, foundPets) => {
 
 		if (err) {
 			console.error(err);
 		}
 		const json = JSON.parse(foundPets)
 		
-		// res.send(json)
+		// console.log(json.petfinder.lastOffset.$t)
 
 		res.render('results.ejs', {
 
 			pets: json.petfinder.pets.pet,
 			location: req.session.location,
 			logged: req.session.logged,
-			username: req.session.username
+			username: req.session.username,
+			query: searchStr
 		})
 
 	})
 
+})
+
+
+app.get('/refine/search', (req, res) => {
+
+	if (!req.session.location) {
+
+		res.redirect('/');
+	}
+	else {
+		res.render('refine.ejs', {
+
+			location: req.session.location,
+			logged: req.session.logged,
+			username: req.session.username
+		})
+	}
 })
 
 
@@ -138,37 +155,9 @@ app.get('/search', (req, res) => {
 
 app.get('/search/:id', (req, res) => {
 
-	let species = req.params.id;
+	if (req.session.location) {
 
-	request('http://api.petfinder.com/breed.list?format=json&key=4514687905f37186817bdb9967ab8c9f&animal='+ species, (err, response, foundBreeds) => {
-		if (err) {
-
-			console.error(err);
-		}
-		else {
-
-			let json = JSON.parse(foundBreeds);
-
-			res.render('search.ejs', {
-
-				breeds: json.petfinder.breeds.breed,
-				location: req.session.location,
-				logged: req.session.logged,
-				username: req.session.username,
-				animal: species
-			})
-		}
-	})
-})
-
-
-app.post('/search', (req, res) => {
-
-	req.session.location = req.body.location
-
-	if (req.body.animal != 'All') {
-
-		let species = req.body.animal;
+		let species = req.params.id;
 
 		request('http://api.petfinder.com/breed.list?format=json&key=4514687905f37186817bdb9967ab8c9f&animal='+ species, (err, response, foundBreeds) => {
 			if (err) {
@@ -189,18 +178,12 @@ app.post('/search', (req, res) => {
 				})
 			}
 		})
-	}	
+	}
 	else {
 
-		res.render('searchall.ejs', {
-
-			location: req.session.location,
-			logged: req.session.logged,
-			username: req.session.username
-		});
+		res.redirect('/')
 	}
 })
-
 
 
 app.get('/clearloc', (req, res) => {
@@ -215,7 +198,7 @@ app.get('/clearloc', (req, res) => {
 //  Route for showing animals when clicked on from SRP(search results page)
 app.get('/view/pet/:id', (req, res)=>{
 
-	request('http://api.petfinder.com/pet.get?format=json&key=4514687905f37186817bdb9967ab8c9f&id=' + req.params.id,(err, response, foundAnimal)=>{
+	request('http://api.petfinder.com/pet.get?format=json&key=4514687905f37186817bdb9967ab8c9f&id=' + req.params.id, (err, response, foundAnimal) => {
 
 		let json = JSON.parse(foundAnimal);
 		// console.log(json);

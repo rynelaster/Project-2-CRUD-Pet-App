@@ -14,11 +14,11 @@
 
 <div class="results-container">
 
-	<% if (pets.length > 0) { %>
+	<% if (pets != undefined) { %>
 
 		<% for (let i = 0; i < pets.length; i++) { -%>
 
-			<div >
+			<div>
 
 				<a class="results" href="/view/pet/<%= pets[i].id.$t %>">
 
@@ -85,6 +85,25 @@
 				</a>
 			</div>
 		<% } -%>
+
+		<div class="change-results">
+
+			<div class="change-view">
+				&#8592; prev 
+			</div>
+
+			<div class="change-view">
+				next &#8594;
+
+			</div>
+		</div>
+	<% } else { %>
+
+		<div class="no-results">
+			
+			Sorry, no results. <a href="/refine/search">Search again?</a>
+
+		</div>
 	<% } %>
 </div>
 
