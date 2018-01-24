@@ -89,7 +89,8 @@ app.post('/results/search', (req, res) => {
 
 		res.render('results.ejs', {
 
-			pets: json.petfinder.pets.pet
+			pets: json.petfinder.pets.pet,
+			location: req.session.location
 		})
 
 	})

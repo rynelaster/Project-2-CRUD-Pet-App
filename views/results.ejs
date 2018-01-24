@@ -10,6 +10,10 @@
 
 <% include ./partials/header.ejs %>
 
+<section class="result-search">
+	<p>You are currently searching using the ZIP code <%= location %>. Click <a href="/clearloc">here</a> to change your search location.</p>
+</section>
+
 <div class="results-container">
 
 	<% if (pets.length > 0) { %>

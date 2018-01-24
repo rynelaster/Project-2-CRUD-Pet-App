@@ -5,6 +5,7 @@ body {
 	margin: 0;
 	font-family: 'Boogaloo', cursive;
 	background-color: #FFEEF2;
+	height: 100%;
 }
 a:link {
 	color: #A35D7C;
@@ -84,7 +85,7 @@ button {
 	flex-wrap: wrap;
 	margin: 0 auto;
 	margin-top: 10px;
-	height: 640px;
+	height: 600px;
 	width: 1000px;
 	overflow-y: scroll;
 	box-shadow: 1px 1px 7px;
@@ -117,6 +118,12 @@ button {
 }
 .results-name {
 	font-size: 46px;
+}
+.result-search {
+	padding: 1px;
+	margin: 0 auto;
+	text-align: center;
+	background-color: #FFC8FB;
 }
 
 
@@ -160,9 +167,8 @@ h1 a:hover {
 /* footer */
 #footer {
 	text-align: center;
-	height: 60px;
 	background-color: #FFC8FB;
-	padding-top: 10px;
+	padding: 1px;
 	position:absolute;
   	bottom: 0;
   	width: 100%;
