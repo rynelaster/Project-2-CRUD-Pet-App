@@ -1,14 +1,38 @@
 <header id="header">
 	<nav class="nav-container">
+
 		<ul class="left-aligned-header">
-			<li> <a href="/">ooga</a> </li>
-			<li> <a href="/">booga</a> </li>
-			<li> <a href="/">googa</a> </li>
+
+			<% if (!logged) { %>
+
+			<li>You are not logged in.</li>
+
+			<% } else { %>
+
+			<li>You are logged in as <%= username %>.</li>
+
+			<% } %>
+
 		</ul>
+
 		<ul class="right-aligned-header">
+
+			<% if (!logged) { %>
+
 			<li><a href="/users/login">Login</a></li>
+
 			<li><a href="/users/registration">Register</a></li>
+
+			<% } else { %>
+
+			<li><a href="/users/logout">Logout</a></li>
+
+			<li><a href="/savedpets">Saved Pets</a></li>
+
+			<% } %>
+
 		</ul>
+
 	</nav>
 	<h1> <a href="/">find ur pets . com</a> </h1>
 </header>

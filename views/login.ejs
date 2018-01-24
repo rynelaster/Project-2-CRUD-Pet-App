@@ -4,22 +4,24 @@
 	<meta charset="utf-8">
 	<title>Login</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
-	<link href="https://fonts.googleapis.com/css?family=Capriola|Mogra|News+Cycle" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Boogaloo|Mogra" rel="stylesheet">
 </head>
 <body>
 
 <% include ./partials/header.ejs%>
 
-<h1>Login Page</h1>
+<div class="login-form">
 
-<p> <%= message %></p>
+<h1>Log in to save or view your saved pets!</h1>
 
-<form action="/users/login" method="Post">
-	<input type="text" name="username" placeholder="username">
-	<input type="password" name="password" placeholder="password">
-	<button>Login</button>
-</form>
+	<p> <%= message %></p>
 
+	<form action="/users/login" method="Post">
+		<input type="text" name="username" placeholder="username"><br>
+		<input type="password" name="password" placeholder="password"><br>
+		<button>Login</button>
+	</form>
+</div>
 
 
 <% include ./partials/footer.ejs %>

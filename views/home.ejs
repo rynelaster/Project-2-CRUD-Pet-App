@@ -11,33 +11,50 @@
 <% include ./partials/header.ejs%>
 
 <section class="home-search">
+
 	<% if (!location) { %>
+
 	<p>A location in the form of a ZIP code is required to search for pets! <br>
 	Please enter your location to search:</p>
+
 	<form action="/refine/search" method="POST">
 		<input type="text" name="location" placeholder="ZIP code"><br>
 		<button>Find the perfect animal!</button>
 	</form>
+
 	<% } else { %>
+
 	<p>You are currently searching using the ZIP code <%= location %>. Click <a href="/clearloc">here</a> to change your search location.</p>
+
 	<form action="/refine/search" method="POST">
 		<button>Find the perfect animal!</button>
 	</form>
+
 	<% } %>
+
 </section>
 
 
 <section>
 
 	<div class="splash-container-bg" style="background-image: url(
+
 	<% let xPhotos = [];%>
+
 	<% for (let i = 0; i < data.media.photos.photo.length; i++) { -%>
+
 		<% if (data.media.photos.photo[i]['@size'] == 'x') { %>
+
 			<% xPhotos.push(data.media.photos.photo[i].$t) %> 
+
 		<% } %>
+
 	<% } -%>
+
 	<% let bgrandomize = Math.floor(Math.random() * xPhotos.length) %>
+
 	<% if (bgrandomize == 0 && xPhotos.length > 1) { bgrandomize = 1 } %>
+	
 	<%= xPhotos[bgrandomize] %>)">
 
 	<div class="splash-container">
