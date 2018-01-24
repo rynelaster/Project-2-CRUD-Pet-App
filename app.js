@@ -56,7 +56,9 @@ app.get('/', (req, res) => {
 			res.render('home.ejs', {
 
 				data: json.petfinder.pet,
-				location: req.session.location
+				location: req.session.location,
+				logged: req.session.logged,
+				username: req.session.username
 			})
 		}
 	})
@@ -90,7 +92,9 @@ app.post('/results/search', (req, res) => {
 		res.render('results.ejs', {
 
 			pets: json.petfinder.pets.pet,
-			location: req.session.location
+			location: req.session.location,
+			logged: req.session.logged,
+			username: req.session.username
 		})
 
 	})
@@ -109,7 +113,9 @@ app.post('/refine/search', (req, res) => {
 
 	res.render('refine.ejs', {
 
-		location: req.session.location
+		location: req.session.location,
+		logged: req.session.logged,
+		username: req.session.username
 	})
 })
 
@@ -119,7 +125,9 @@ app.get('/search', (req, res) => {
 	if (req.session.location) {
 		res.render('searchall.ejs', {
 
-			location: req.session.location
+			location: req.session.location,
+			logged: req.session.logged,
+			username: req.session.username
 		})
 	}
 	else {
@@ -145,6 +153,8 @@ app.get('/search/:id', (req, res) => {
 
 				breeds: json.petfinder.breeds.breed,
 				location: req.session.location,
+				logged: req.session.logged,
+				username: req.session.username,
 				animal: species
 			})
 		}
@@ -173,6 +183,8 @@ app.post('/search', (req, res) => {
 
 					breeds: json.petfinder.breeds.breed,
 					location: req.session.location,
+					logged: req.session.logged,
+					username: req.session.username,
 					animal: species
 				})
 			}
@@ -182,7 +194,9 @@ app.post('/search', (req, res) => {
 
 		res.render('searchall.ejs', {
 
-			location: req.session.location
+			location: req.session.location,
+			logged: req.session.logged,
+			username: req.session.username
 		});
 	}
 })
@@ -211,7 +225,12 @@ app.get('/view/pet/:id', (req, res)=>{
 		console.log('------------------------------------------')
 
 		res.render('showPet.ejs', {
-			data: json.petfinder.pet})
+
+			data: json.petfinder.pet,
+			location: req.session.location,
+			logged: req.session.logged,
+			username: req.session.username
+		})
 	})
 });
 

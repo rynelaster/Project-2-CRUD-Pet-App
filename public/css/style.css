@@ -13,6 +13,10 @@ a:link {
 button {
 	padding: 0.5em;
 	font-size: 1em;
+	font-family: 'Georgia';
+}
+input {
+	font-family: 'Georgia';
 }
 
 
@@ -50,11 +54,10 @@ button {
 	margin: 0 auto;
 	text-align: center;
 	background-color: #FFC8FB;
-	padding: 5px 0px 20px 0px;
-	font-size: 18px;
+	padding: 1px 0px 20px 0px;
 }
 .home-search input {
-	width: 190px;
+	width: 180px;
 	height: 30px;
 	font-size: 1em;
 	margin-bottom: 10px;
@@ -62,18 +65,25 @@ button {
 
 /* refine */
 .pet-type {
+	margin: 0 auto;
 	text-align: center;
 	font-size: 48px;
-	/*border: 1px solid black;*/
-	margin-top: 50px;
+	margin-top: 200px;
 	padding: 20px;
-	background-color: #FFC8FB;
+	background-color: white;
+	width: 500px;
+	box-shadow: 1px 1px 7px;
 }
 
 /* search */
 .search-form {
 	margin: 0 auto;
+	margin-top: 200px;
 	text-align: center;
+	width: 700px;
+	box-shadow: 1px 1px 7px;
+	background-color: white;
+	padding: 5px 0px 30px 0px;
 }
 .search-form button {
 	margin-top: 10px;
@@ -109,6 +119,8 @@ button {
 	overflow: hidden;
 	text-decoration: underline;
 	margin-left: 5px;
+	font-family: 'Georgia';
+	font-size: 14px;
 }
 .result-thumb {
 	height: 150px;
@@ -118,12 +130,42 @@ button {
 }
 .results-name {
 	font-size: 46px;
+	font-family: 'Boogaloo', cursive;
 }
 .result-search {
 	padding: 1px;
 	margin: 0 auto;
 	text-align: center;
 	background-color: #FFC8FB;
+}
+
+
+/* login */
+.login-form {
+	margin: 0 auto;
+	margin-top: 200px;
+	text-align: center;
+	width: 500px;
+	box-shadow: 1px 1px 7px;
+	background-color: white;
+	padding: 5px 0px 20px 0px;
+}
+.login-form input {
+	margin-bottom: 5px;
+}
+
+/* register */
+.register-form {
+	margin: 0 auto;
+	margin-top: 200px;
+	text-align: center;
+	width: 500px;
+	box-shadow: 1px 1px 7px;
+	background-color: white;
+	padding: 5px 0px 20px 0px;
+}
+.register-form input {
+	margin-bottom: 5px;
 }
 
 
@@ -172,6 +214,11 @@ h1 a:hover {
 	position:absolute;
   	bottom: 0;
   	width: 100%;
+  	font-family: 'Georgia';
+  	font-size: 12px;
+}
+.smiley {
+	font-size: 18px;
 }
 
 
