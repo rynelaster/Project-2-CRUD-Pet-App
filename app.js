@@ -42,6 +42,8 @@ app.use('/users', userController);
 
 app.get('/', (req, res) => {
 
+	console.log(req.session.location)
+
 	request('http://api.petfinder.com/pet.getRandom?format=json&key=4514687905f37186817bdb9967ab8c9f&output=basic', (err, response, body) => {
 		if (err) {
 
@@ -53,7 +55,8 @@ app.get('/', (req, res) => {
 
 			res.render('home.ejs', {
 
-				data: json.petfinder.pet
+				data: json.petfinder.pet,
+				location: req.session.location
 			})
 		}
 	})
@@ -66,8 +69,6 @@ app.post('/results/search', (req, res) => {
 
 	let searchStr = '';
 
-	req.session.shelterList = [];
-
 	for (let key in searchObj) {
 		if (searchObj[key] != 'All' && searchObj[key] != '') {
 
@@ -79,52 +80,13 @@ app.post('/results/search', (req, res) => {
 
 	request('http://api.petfinder.com/pet.find?format=json&key=4514687905f37186817bdb9967ab8c9f' + searchStr, (err, response, foundPets) => {
 
+		if (err) {
+			console.error(err);
+		}
 		const json = JSON.parse(foundPets)
-
-
-		/* WORKING ON LOOPING AND MAKING API REQUESTS BASED ON SHELTERID TO PUT ADDITIONAL INFORMATION IN RESULTS PAGE */
-
-
-		// for (let i = 0; i < json.petfinder.pets.pet.length; i++) {
-		// 	if (req.session.shelterList.indexOf(json.petfinder.pets.pet[i].shelterId.$t) > -1) {
-		// 		//the shelter has been 
-		// 	}
-		// 	else {
-		// 		req.session.shelterList.push(json.petfinder.pets.pet[i].shelterId.$t)
-		// 	}
-		// }
-
-		// const foo = json.petfinder.pets.pet[0].shelterId.$t;
-
-		// request('http://api.petfinder.com/shelter.get?format=json&key=4514687905f37186817bdb9967ab8c9f&id=' + foo, (err, response, foundShelter) => {
-
-		// 	res.send(foundShelter)
-		// })
-
-
-
-
-		/* TRYING TO GET SORT BY DATE WORKING */
-
-		// const dateSorted = [];
-
-		// for (let i = 0; i < json.petfinder.pets.pet.length; i++) {
-		// 	dateSorted.push(json.petfinder.pets.pet[i]);
-		// }
-
-		// dateSorted.sort((a, b) => {
-		// 	return new Date(a.lastUpdate.$t) - new Date(b.lastUpdate.$t);
-		// })
-
-		// setTimeout(() => {
-		// 	console.log(dateSorted);
-		// }, 3000)
-
-
-
-
 		
 		// res.send(json)
+
 		res.render('results.ejs', {
 
 			pets: json.petfinder.pets.pet
@@ -132,6 +94,22 @@ app.post('/results/search', (req, res) => {
 
 	})
 
+})
+
+
+app.post('/refine/search', (req, res) => {
+
+	if (!req.session.location) {
+
+		req.session.location = req.body.location
+	}
+
+	console.log(req.session.location)
+
+	res.render('refine.ejs', {
+
+		location: req.session.location
+	})
 })
 
 
@@ -146,6 +124,30 @@ app.get('/search', (req, res) => {
 	else {
 		res.redirect('/');
 	}
+})
+
+
+app.get('/search/:id', (req, res) => {
+
+	let species = req.params.id;
+
+	request('http://api.petfinder.com/breed.list?format=json&key=4514687905f37186817bdb9967ab8c9f&animal='+ species, (err, response, foundBreeds) => {
+		if (err) {
+
+			console.error(err);
+		}
+		else {
+
+			let json = JSON.parse(foundBreeds);
+
+			res.render('search.ejs', {
+
+				breeds: json.petfinder.breeds.breed,
+				location: req.session.location,
+				animal: species
+			})
+		}
+	})
 })
 
 
@@ -182,6 +184,15 @@ app.post('/search', (req, res) => {
 			location: req.session.location
 		});
 	}
+})
+
+
+
+app.get('/clearloc', (req, res) => {
+
+	req.session.location = null;
+
+	res.redirect('/');
 })
 
 
