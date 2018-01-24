@@ -4,41 +4,16 @@
 body {
 	margin: 0;
 	font-family: 'Boogaloo', cursive;
+	background-color: #FFEEF2;
+}
+a:link {
+	color: #A35D7C;
+}
+button {
+	padding: 0.5em;
+	font-size: 1em;
 }
 
-
-/* header */
-nav ul {
-	list-style: none;
-	text-align: center;
-	padding: 0;
-	margin: 0;
-	display: flex;
-	justify-content: center;
-	flex-wrap: nowrap;
-} 
-h1 {
-	text-align: center;
-	margin-top: 0px;
-	margin-bottom: 1px;
-}
-h1 a {
-	text-decoration: none;
-	color: black;
-}
-h1 a:hover {
-	text-decoration: underline;
-}
-.nav-container {
-	display: flex;
-	justify-content: space-between;
-}
-.left-aligned-header li {
-	margin-left: 20px;
-}
-.right-aligned-header li {
-	margin-right: 20px;
-}
 
 /* home.ejs */
 .splash-container {
@@ -73,6 +48,25 @@ h1 a:hover {
 .home-search {
 	margin: 0 auto;
 	text-align: center;
+	background-color: #FFC8FB;
+	padding: 5px 0px 20px 0px;
+	font-size: 18px;
+}
+.home-search input {
+	width: 190px;
+	height: 30px;
+	font-size: 1em;
+	margin-bottom: 10px;
+}
+
+/* refine */
+.pet-type {
+	text-align: center;
+	font-size: 48px;
+	/*border: 1px solid black;*/
+	margin-top: 50px;
+	padding: 20px;
+	background-color: #FFC8FB;
 }
 
 /* search */
@@ -80,18 +74,22 @@ h1 a:hover {
 	margin: 0 auto;
 	text-align: center;
 }
+.search-form button {
+	margin-top: 10px;
+}
 
 /* results */
 .results-container {
 	display: flex;
 	flex-wrap: wrap;
 	margin: 0 auto;
-	margin-top: 20px;
-	height: 700px;
+	margin-top: 10px;
+	height: 640px;
 	width: 1000px;
 	overflow-y: scroll;
 	box-shadow: 1px 1px 7px;
 	padding-bottom: 20px;
+	background-color: white;
 }
 .results {
 	display: flex;
@@ -119,6 +117,55 @@ h1 a:hover {
 }
 .results-name {
 	font-size: 46px;
+}
+
+
+/* header */
+#header {
+	padding-top: 10px;
+	margin-bottom: 10px;
+}
+nav ul {
+	list-style: none;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	flex-wrap: nowrap;
+} 
+h1 {
+	text-align: center;
+	margin-top: 0px;
+	margin-bottom: 1px;
+}
+h1 a {
+	text-decoration: none;
+	color: black;
+}
+h1 a:hover {
+	text-decoration: underline;
+}
+.nav-container {
+	display: flex;
+	justify-content: space-between;
+}
+.left-aligned-header li {
+	margin-left: 20px;
+}
+.right-aligned-header li {
+	margin-right: 20px;
+}
+
+/* footer */
+#footer {
+	text-align: center;
+	height: 60px;
+	background-color: #FFC8FB;
+	padding-top: 10px;
+	position:absolute;
+  	bottom: 0;
+  	width: 100%;
 }
 
 
