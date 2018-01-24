@@ -3,34 +3,21 @@
 <head>
 	<title>show pet</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
-	<link href="https://fonts.googleapis.com/css?family=Boogaloo|Mogra" rel="stylesheet">
 </head>
 <body>
 
 
-<div class="show-pet-container">
-	<div class="detail-container">
-		<div id="picture-container">
-			<img id="picture" src="<%=  %>">
-		</div>
-		<div id="name-description-container">
-			<div id="data.name.$t"></div>
-			<div id="data.description.$t"></div>
-		</div>
-	</div>
-	<div class="detail-container">
-		last update: <div id="last-updated"></div>
-		<div id="data.age.$t"></div>
-		<div id="data.species.$t"></div>
-		<div id="data.breed.$t"></div>
-		<div id="data.gender.$t"></div>
-	</div>
-	<div class="detail-container">
-		<div id="contact">
-		</div>
-	</div>		
-</div>
+<%=data.contact.phone.$t%>
+<%=data.contact.address1.$t%>
+<%=data.contact.city.$t%>
+<%=data.contact.zip.$t%>
+<%=data.breeds.breed.$t%>
+<%=data.name.$t%>
+<%=data.id.$t%>
+<%=data.shelterId.$t%>
+<%=data.description.$t%>
 
+<img class="image-overlay" src=" <%= data.media.photos.photo[2].$t %>">
 
 
 
