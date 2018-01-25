@@ -1,6 +1,9 @@
 /** {
 	border: 1px solid black;
 }*/
+html {
+	height: 100%;
+}
 body {
 	margin: 0;
 	font-family: 'Boogaloo', cursive;
@@ -8,7 +11,7 @@ body {
 	height: 100%;
 }
 a:link {
-	color: #A35D7C;
+	color: #744359;
 }
 button {
 	padding: 0.5em;
@@ -17,6 +20,9 @@ button {
 }
 input {
 	font-family: 'Georgia';
+}
+.hidden {
+	display: none;
 }
 
 
@@ -53,7 +59,10 @@ input {
 .home-search {
 	margin: 0 auto;
 	text-align: center;
+/*	height: 300px;
+	background-image: url(../img/dogandowner.jpg);*/
 	background-color: #FFC8FB;
+	background-size: cover;
 	padding: 1px 0px 20px 0px;
 }
 .home-search input {
@@ -73,6 +82,7 @@ input {
 	background-color: white;
 	width: 500px;
 	box-shadow: 1px 1px 7px;
+	border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 /* search */
@@ -82,6 +92,7 @@ input {
 	text-align: center;
 	width: 700px;
 	box-shadow: 1px 1px 7px;
+	border: 1px solid rgba(0, 0, 0, 0.5);
 	background-color: white;
 	padding: 5px 0px 30px 0px;
 }
@@ -90,15 +101,25 @@ input {
 }
 
 /* results */
+.prev-next-container {
+	display: flex;
+	justify-content: center;
+	margin: 0 auto;
+	margin-top: 10px;
+}
+.results-button {
+	margin: 0px 10px 0px 10px;
+	width: 70px;
+}
 .results-container {
 	display: flex;
 	flex-wrap: wrap;
-	margin: 0 auto;
-	margin-top: 10px;
-	height: 600px;
+	justify-content: center;
+	height: 650px;
 	width: 1000px;
 	overflow-y: scroll;
 	box-shadow: 1px 1px 7px;
+	border: 1px solid rgba(0, 0, 0, 0.5);
 	padding-bottom: 20px;
 	background-color: white;
 }
@@ -106,7 +127,7 @@ input {
 	display: flex;
 	justify-content: flex-start;
 	width: 462px;
-	margin: 20px 10px 0px 20px;
+	margin: 20px 10px 0px 10px;
 	border: 1px solid black;
 	background-image: url('../img/resultsbg.jpg');
 	background-size: cover;
@@ -139,18 +160,6 @@ input {
 	text-align: center;
 	background-color: #FFC8FB;
 }
-.change-results {
-	display: flex;
-	justify-content: space-between;
-	width: 462px;
-	height: 150px;
-	margin: 20px 10px 0px 20px;
-	border: 1px solid black;
-	background-image: url('../img/resultsbg.jpg');
-	background-size: cover;
-	color: black;
-	text-decoration: none;
-}
 .change-view {
 	font-size: 42px;
 	margin: 0px 10px 0px 10px;
@@ -161,6 +170,50 @@ input {
 	margin: 50px;
 }
 
+/* shelter results */
+.shelter-results-container {
+	margin: 0 auto;
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	height: 650px;
+	width: 1000px;
+	overflow-y: scroll;
+	box-shadow: 1px 1px 7px;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	padding-bottom: 20px;
+	background-color: white;
+}
+.shelter-result {
+	border: 1px black solid;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	height: 75px;
+	width: 475px;
+	margin: 20px 10px 0px 10px;
+	background-image: url('../img/resultsbg.jpg');
+	background-size: cover;
+	color: black;
+	text-decoration: none;
+}
+.shelter-detail-info {
+	display: flex;
+	justify-content: space-between;
+	font-family: 'Georgia';
+	height: 40px;
+	border-top: 1px solid black;
+	margin: 5px;
+}
+.shelter-name {
+	font-size: 28px;
+	margin-left: 5px;
+}
+.shelter-contact-info {
+	font-size: 12px;
+}
+
 
 /* login */
 .login-form {
@@ -169,6 +222,7 @@ input {
 	text-align: center;
 	width: 500px;
 	box-shadow: 1px 1px 7px;
+	border: 1px solid rgba(0, 0, 0, 0.5);
 	background-color: white;
 	padding: 5px 0px 20px 0px;
 }
@@ -183,6 +237,7 @@ input {
 	text-align: center;
 	width: 500px;
 	box-shadow: 1px 1px 7px;
+	border: 1px solid rgba(0, 0, 0, 0.5);
 	background-color: white;
 	padding: 5px 0px 20px 0px;
 }
@@ -240,6 +295,88 @@ input {
 }
 
 
+/* show shelter page */
+.shelter-container {
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	margin: 0 auto;
+	margin-top: 20px;
+	width: 1000px;
+	display: flex;
+	justify-content: flex-start;
+	box-shadow: 1px 1px 7px;
+	background-image: url('../img/resultsbg.jpg');
+}
+#map {
+	height: 500px;
+	width: 500px;
+}
+.shelter-display {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	width: 495px;
+}
+.shelter-view-name {
+	font-size: 52px;
+	line-height: 90%;
+	margin: 2px;
+}
+.shelter-view-address {
+	font-family: 'Georgia';
+	font-size: 18px;
+	margin: 2px;
+	border-top: 1px black solid;
+}
+.shelter-view-contact {
+	font-family: 'Georgia';
+	font-size: 18px;
+	margin: 2px;
+	border-top: 1px black solid;
+	border-bottom: 1px black solid;
+}
+.show-a-pet-title {
+	text-align: center;
+	font-size: 24px;
+}
+.show-these-pets {
+	box-shadow: 1px 1px 7px;
+	height: 270px;
+	width: 470px;
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: column;
+	overflow-y: scroll;
+	margin-left: 15px;
+	margin-bottom: 15px;
+}
+.show-a-pet-results {
+	border: 1px solid black;
+	display: flex;
+	justify-content: flex-start;
+	width: 430px;
+	margin: 20px 10px 0px 20px;
+	background-image: url('../img/resultsbg.jpg');
+	background-size: cover;
+	color: black;
+	text-decoration: none;
+}
+.show-a-pet-detail {
+	margin-left: 5px;
+	font-family: 'Georgia';
+	font-size: 14px;
+}
+.show-a-pet-image {
+	height: 100px;
+}
+.show-a-pet-image img {
+	height: 100%;
+}
+.show-a-pet-name {
+	font-family: 'Boogaloo', cursive;
+	font-size: 32px;
+	text-decoration: underline;
+}
+
 
 /* header */
 #header {
@@ -278,6 +415,14 @@ h1 a:hover {
 	margin-right: 20px;
 }
 
+
+/* all container for footer to work */
+#all-container {
+	min-height: 100%;
+   	position: relative;
+}
+
+
 /* footer */
 #footer {
 	text-align: center;
@@ -285,12 +430,19 @@ h1 a:hover {
 	padding: 1px;
 	position:absolute;
   	bottom: 0;
+  	height: 50px;
   	width: 100%;
   	font-family: 'Georgia';
   	font-size: 12px;
 }
 .smiley {
 	font-size: 18px;
+}
+
+
+/* body */
+#body {
+	padding-bottom: 60px;
 }
 
 

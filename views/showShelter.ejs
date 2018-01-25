@@ -3,14 +3,192 @@
 <head>
 	<title>Shelter</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Boogaloo|Mogra" rel="stylesheet">
 </head>
-<body>
+<body onload="loadmap()">
 
-<div id="pet-listings"></div>
+<div id="all-container">
+	
+	<% include ./partials/header.ejs %>
+
+	<main id="body">
+
+		<% include ./partials/location.ejs %>
+		
+		<div class="shelter-container">
+
+				<div id="map"></div>
+
+				<div class="shelter-display">
+					
+					<div class="shelter-information"> 
+
+						<div class="shelter-view-name">
+
+							<%= shelter.name.$t %>
+							
+						</div>
+
+						<div class="shelter-view-address">
+
+							<% if (shelter.address1.$t == undefined) { %>
+
+							Address not specified.
+
+							<% } else { %>
+
+							<%= shelter.address1.$t%> 
+
+							<% } %>
+
+							<%= shelter.city.$t %>, <%= shelter.state.$t %>
+
+						</div>
+
+						<div class="shelter-view-contact">
+							
+							Phone: <%= shelter.phone.$t %> <br>
+							Email: <%= shelter.email.$t %>
+
+						</div>
+
+					</div>
+
+					<div class="show-a-pet-title">Some available pets at this location:</div>
+
+					<div class="show-these-pets">
+
+						<% for (let i = 0; i < pets.length; i++) { -%>
+							
+						<div>
+	
+							<a class="show-a-pet-results" href="/view/pet/<%= pets[i].id.$t %>">
+
+								<div class="show-a-pet-image">
+
+									<% if (pets[i].media.photos != undefined) { %>
+
+										<% for (let j = 0; j < pets[i].media.photos.photo.length; j++) { -%>
+
+											<% if (pets[i].media.photos.photo[0].$t != undefined && pets[i].media.photos.photo[j]['@size'] == 'pn' && pets[i].media.photos.photo[j]['@id'] == 1) { %>
+
+												<img src="<%= pets[i].media.photos.photo[j].$t %>">
+
+											<% } %>
+
+										<% } -%>
+
+									<% } else if (pets[i].media.photos == undefined && pets[i].animal.$t == 'Dog') { %>
+
+										<img src="/img/defaultdog.png">
+
+									<% } else { %>
+
+										<img src="/img/defaultcat.png">
+
+									<% } %>
+
+								</div>
+						
+								<div class="show-a-pet-detail">
+
+									<div class="show-a-pet-name"><%= pets[i].name.$t %></div>
+
+									<div> 
+
+										<%= pets[i].age.$t %>, <% if (pets[i].sex.$t == 'm') { %> Male <% } else { %> Female <% } %>
+										
+									</div>
+
+									<div> 
+
+									<% if (Array.isArray(pets[i].breeds.breed) == true) { %> 
+
+										<% for (let k = 0; k < pets[i].breeds.breed.length; k++) { -%>
+
+											<%= pets[i].breeds.breed[k].$t %><% if (k < pets[i].breeds.breed.length - 1) { %>, <% } %>
+
+										<% } -%>
+
+									<% } else { %>
+
+										<%= pets[i].breeds.breed.$t %>
+
+									<% } %>
+
+									</div>
+
+									<div>
+										
+										Last updated: <%= pets[i].lastUpdate.$t.slice(0, 10) %>
+
+									</div>
+								</div>
+							</a>
+
+						</div>
+
+						<% } -%>
+
+					</div>
+
+				</div>
+		</div>
+
+	</main>
+
+	<% include ./partials/footer.ejs %>
+
+</div>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLK3TbM3Z3YSSRI7DjhjHrhb736O7-tZU&libraries=places"></script>
+<script>
+	let map;
+
+	const loadmap = () => {
+		const mapOptions = {
+			center: new google.maps.LatLng(<%= shelter.latitude.$t %>, <%= shelter.longitude.$t %>),
+			zoom: 11
+		}
+		map = new google.maps.Map(document.getElementById('map'),
+			mapOptions);
+
+		const geocoder = new google.maps.Geocoder;
+
+		const latlng = {lat: <%= shelter.latitude.$t %>, lng: <%= shelter.longitude.$t %>};
+
+		geocoder.geocode({'location': latlng}, function(results, status) {
+
+    		if (status === google.maps.GeocoderStatus.OK) {
+
+      			if (results[1]) {
+
+        			console.log(results[1].place_id);
+
+        			const service = new google.maps.places.PlacesService(map);
+
+        			service.getDetails({ placeId: results[1].place_id }, (place, status) => {
+
+        				if (status === google.maps.places.PlacesServiceStatus.OK) {
+        					const marker = new google.maps.Marker({
+        						map: map,
+        						position: place.geometry.location
+        					});
+        				}
+        			})
 
 
+      			} 
+      			else {
 
-<script type="text/javascript" src="/js/showShelter.js"></script>
+        			window.alert('No results found');
+      			}
+    		} 
+    		else {
+
+      			window.alert('Geocoder failed due to: ' + status);
+    		}
+  		});
+	}
+</script>
 </body>
 </html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Shelter results</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Boogaloo|Mogra" rel="stylesheet">
+</head>
+<body>
+
+<div id="all-container">
+	
+	<% include ./partials/header.ejs %>
+
+	<main id="body">
+
+		<% include ./partials/location.ejs %>
+
+		<div class="shelter-results-container">
+			
+			<% for (let i = 0; i < shelters.shelter.length; i++) { -%>
+
+			<div>
+
+				<a class="shelter-result" href="/view/shelter/<%= shelters.shelter[i].id.$t %>">
+
+					<div class="shelter-name"> 
+
+						<%= shelters.shelter[i].name.$t %> 
+
+					</div>
+
+					<div class="shelter-detail-info">
+
+						<div class="shelter-address"> 
+
+							<% if (shelters.shelter[i].address1.$t == undefined) { %>
+
+							Address not specified.
+
+							<% } else { %>
+
+							<%= shelters.shelter[i].address1.$t%> 
+
+							<% } %>
+
+							<%= shelters.shelter[i].city.$t%>, <%= shelters.shelter[i].state.$t %>, <%= shelters.shelter[i].zip.$t %>
+
+						</div>
+
+						<div class="shelter-contact-info">
+							
+							<div class="shelter-phone"> <%= shelters.shelter[i].phone.$t %> </div>
+
+							<div class="shelter-email"> <%= shelters.shelter[i].email.$t %> </div>
+
+						</div>
+
+					</div>
+
+				</a>	
+
+			</div>
+
+			<% } -%>
+
+		</div>
+
+	</main>
+
+	<% include ./partials/footer.ejs %>
+
+</div>
+
+
+</body>
+</html>

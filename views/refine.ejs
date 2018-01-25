@@ -8,18 +8,27 @@
 </head>
 <body>
 
-<% include ./partials/header.ejs %>
+<div id="all-container">	
 
-<% include ./partials/location.ejs %>
+	<% include ./partials/header.ejs %>
 
-<main>
-	<div class="pet-type">
-		<a href="/search/cat">Cats</a> | <a href="/search/dog">Dogs</a> | <a href="/search">All Animals</a>
-	</div>
-</main>
+	<main id="body">
+
+		<% include ./partials/location.ejs %>
+
+		<div>
+			<div class="pet-type">
+				<a href="/search/cat">Cats</a> | <a href="/search/dog">Dogs</a> | <a href="/search">All animals</a><br> <a href="/shelter/search">By shelters</a>
+			</div>
+		</div>
+
+	</main>
+	
+	<% include ./partials/footer.ejs %>
+
+</div>
 
 
-<% include ./partials/footer.ejs %>
-
+<script type="text/javascript" src="/js/showmap.js"></script>
 </body>
 </html>

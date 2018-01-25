@@ -52,12 +52,18 @@ app.get('/', (req, res) => {
 
 			const json = JSON.parse(body);
 
+			if (!json.petfinder.pet.media.photos) {
+
+				res.redirect('/');
+			}
+
 			res.render('home.ejs', {
 
 				data: json.petfinder.pet,
 				location: req.session.location,
 				logged: req.session.logged,
-				username: req.session.username
+				username: req.session.username,
+				errlocation: req.session.errlocation
 			})
 		}
 	})
@@ -84,25 +90,70 @@ app.post('/results/search', (req, res) => {
 		if (err) {
 			console.error(err);
 		}
-		const json = JSON.parse(foundPets)
-		
-		// console.log(json.petfinder.lastOffset.$t)
+		else {
 
-		res.render('results.ejs', {
+			const json = JSON.parse(foundPets);
 
-			pets: json.petfinder.pets.pet,
-			location: req.session.location,
-			logged: req.session.logged,
-			username: req.session.username,
-			query: searchStr
-		})
+			if (json.petfinder.pets != undefined) {
 
+				// console.log(json.petfinder.lastOffset.$t)
+
+				res.render('results.ejs', {
+
+					pets: json.petfinder.pets.pet,
+					location: req.session.location,
+					logged: req.session.logged,
+					username: req.session.username,
+					offset: json.petfinder.lastOffset.$t,
+					query: searchStr
+				})
+			}
+			else {
+
+				req.session.location = '';
+
+				req.session.errlocation = 'Your location is invalid. Please enter a valid location.'
+
+				res.redirect('/');
+			}
+		}
 	})
 
 })
 
 
+app.post('/results/search/:id', (req, res) => {
+
+	const searchStr = req.body.searchStr;
+
+	request(searchStr + req.params.id, (err, response, foundPets) => {
+
+		if (err) {
+			console.error(err);
+		}
+		else {
+
+			const json = JSON.parse(foundPets);
+
+			console.log(json.petfinder.lastOffset.$t);
+
+			res.render('results.ejs', {
+
+				pets: json.petfinder.pets.pet,
+				location: req.session.location,
+				logged: req.session.logged,
+				username: req.session.username,
+				offset: json.petfinder.lastOffset.$t,
+				query: searchStr
+			})
+		}
+	})
+})
+
+
 app.get('/refine/search', (req, res) => {
+
+	req.session.errlocation = '';
 
 	if (!req.session.location) {
 
@@ -120,6 +171,8 @@ app.get('/refine/search', (req, res) => {
 
 
 app.post('/refine/search', (req, res) => {
+
+	req.session.errlocation = '';
 
 	if (!req.session.location) {
 
@@ -200,7 +253,7 @@ app.get('/view/pet/:id', (req, res)=>{
 
 	request('http://api.petfinder.com/pet.get?format=json&key=4514687905f37186817bdb9967ab8c9f&id=' + req.params.id, (err, response, foundAnimal) => {
 
-		let json = JSON.parse(foundAnimal);
+		const json = JSON.parse(foundAnimal);
 		// console.log(json);
 		console.log('------------------------------------------')
 		console.log(json.petfinder.pet, ' this is data object')
@@ -215,7 +268,70 @@ app.get('/view/pet/:id', (req, res)=>{
 			username: req.session.username
 		})
 	})
-});
+})
+
+
+
+app.get('/shelter/search', (req, res) => {
+
+	request('http://api.petfinder.com/shelter.find?format=json&key=4514687905f37186817bdb9967ab8c9f&location=' + req.session.location, (err, response, foundShelters) => {
+		if (err) {
+			console.error(err)
+		}
+		else {
+
+			const json = JSON.parse(foundShelters);
+			// res.send(json.petfinder);
+			res.render('shelterResults.ejs', {
+
+				shelters: json.petfinder.shelters,
+				location: req.session.location,
+				logged: req.session.logged,
+				username: req.session.username
+			})
+		}
+	})
+})
+
+
+
+app.get('/view/shelter/:id', (req, res) => {
+
+	request('http://api.petfinder.com/shelter.get?format=json&key=4514687905f37186817bdb9967ab8c9f&id=' + req.params.id, (err, response, foundShelter) => {
+		if (err) {
+			console.error(err)
+		}
+		else {
+
+			const json = JSON.parse(foundShelter)
+
+			// res.send(json.petfinder.shelter);
+
+			request('http://api.petfinder.com/shelter.getPets?format=json&key=4514687905f37186817bdb9967ab8c9f&count=5&id=' + req.params.id, (err, response, foundPets) => {
+
+				if (err) {
+
+					console.error(err)
+				}
+				else {
+
+					const petsJson = JSON.parse(foundPets)
+
+					// console.log(petsJson.petfinder);
+
+					res.render('showShelter.ejs', {
+
+						shelter: json.petfinder.shelter,
+						pets: petsJson.petfinder.pets.pet,
+						location: req.session.location,
+						logged: req.session.logged,
+						username: req.session.username
+					})
+				}
+			})
+		}
+	})
+})
 
 
 app.get('/pet/images/:id', (req, res) => {
