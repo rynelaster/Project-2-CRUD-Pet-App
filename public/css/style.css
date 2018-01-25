@@ -1,6 +1,6 @@
-* {
+/** {
 	border: 1px solid black;
-}
+}*/
 html {
 	height: 100%;
 }
@@ -282,8 +282,71 @@ input {
 	height: 500px;
 	width: 500px;
 }
+.shelter-display {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	width: 495px;
+}
 .shelter-view-name {
-	font-size: 42px;
+	font-size: 52px;
+	line-height: 90%;
+	margin: 2px;
+}
+.shelter-view-address {
+	font-family: 'Georgia';
+	font-size: 18px;
+	margin: 2px;
+	border-top: 1px black solid;
+}
+.shelter-view-contact {
+	font-family: 'Georgia';
+	font-size: 18px;
+	margin: 2px;
+	border-top: 1px black solid;
+	border-bottom: 1px black solid;
+}
+.show-a-pet-title {
+	text-align: center;
+	font-size: 24px;
+}
+.show-these-pets {
+	box-shadow: 1px 1px 7px;
+	height: 270px;
+	width: 470px;
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: column;
+	overflow-y: scroll;
+	margin-left: 15px;
+	margin-bottom: 15px;
+}
+.show-a-pet-results {
+	border: 1px solid black;
+	display: flex;
+	justify-content: flex-start;
+	width: 430px;
+	margin: 20px 10px 0px 20px;
+	background-image: url('../img/resultsbg.jpg');
+	background-size: cover;
+	color: black;
+	text-decoration: none;
+}
+.show-a-pet-detail {
+	margin-left: 5px;
+	font-family: 'Georgia';
+	font-size: 14px;
+}
+.show-a-pet-image {
+	height: 100px;
+}
+.show-a-pet-image img {
+	height: 100%;
+}
+.show-a-pet-name {
+	font-family: 'Boogaloo', cursive;
+	font-size: 32px;
+	text-decoration: underline;
 }
 
 

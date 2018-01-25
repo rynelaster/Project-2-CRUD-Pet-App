@@ -305,17 +305,31 @@ app.get('/view/shelter/:id', (req, res) => {
 
 			const json = JSON.parse(foundShelter)
 
-			// res.send(json.petfinder);
+			// res.send(json.petfinder.shelter);
 
-			res.render('showShelter.ejs', {
+			request('http://api.petfinder.com/shelter.getPets?format=json&key=4514687905f37186817bdb9967ab8c9f&count=5&id=' + req.params.id, (err, response, foundPets) => {
 
-				shelter: json.petfinder.shelter,
-				location: req.session.location,
-				logged: req.session.logged,
-				username: req.session.username
+				if (err) {
+
+					console.error(err)
+				}
+				else {
+
+					const petsJson = JSON.parse(foundPets)
+
+					// console.log(petsJson.petfinder);
+
+					res.render('showShelter.ejs', {
+
+						shelter: json.petfinder.shelter,
+						pets: petsJson.petfinder.pets.pet,
+						location: req.session.location,
+						logged: req.session.logged,
+						username: req.session.username
+					})
+				}
 			})
 		}
-
 	})
 })
 
