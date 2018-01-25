@@ -8,24 +8,31 @@
 </head>
 <body>
 
-<% include ./partials/header.ejs%>
+<div id="all-container">
 
-<div class="login-form">
+	<% include ./partials/header.ejs%>
 
-<h1>Log in to save or view your saved pets!</h1>
+	<main id="body">
 
-	<p> <%= message %></p>
+		<div class="login-form">
 
-	<form action="/users/login" method="Post">
-		<input type="text" name="username" placeholder="username"><br>
-		<input type="password" name="password" placeholder="password"><br>
-		<button>Login</button>
-	</form>
+		<h1>Log in to save or view your saved pets!</h1>
+
+			<p> <%= message %></p>
+
+			<form action="/users/login" method="Post">
+				<input type="text" name="username" placeholder="username"><br>
+				<input type="password" name="password" placeholder="password"><br>
+				<button>Login</button>
+			</form>
+		</div>
+
+
+	<% include ./partials/footer.ejs %>
+
+	</main>
+
 </div>
-
-
-<% include ./partials/footer.ejs %>
-
 
 </body>
 </html>

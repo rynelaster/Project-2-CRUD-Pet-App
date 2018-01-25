@@ -7,25 +7,31 @@
 	<link href="https://fonts.googleapis.com/css?family=Boogaloo|Mogra" rel="stylesheet">
 </head>
 <body>
+
+<div id="all-container">
+
 	<% include ./partials/header.ejs%>
 
+	<main id="body">
 
+		<div class="register-form">
 
+		<h1>Register to be able to save a pets' profile!</h1>
 
-<div class="register-form">
+			<form action="/users/registration" method="post">
+				<input type="text" placeholder="Username" name="username"><br>
+				<input type="password" placeholder="password" name="password"><br>
+				<button>Register</button>
 
-<h1>Register to be able to save a pets' profile!</h1>
+			</form>
 
-	<form action="/users/registration" method="post">
-		<input type="text" placeholder="Username" name="username"><br>
-		<input type="password" placeholder="password" name="password"><br>
-		<button>Register</button>
+		</div>
 
-	</form>
+	</main>
+
+	<% include ./partials/footer.ejs %>
 
 </div>
-
-<% include ./partials/footer.ejs %>
 
 </body>
 </html>

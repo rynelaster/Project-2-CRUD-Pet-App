@@ -8,54 +8,61 @@
 </head>
 <body>
 
-<% include ./partials/header.ejs %>
+<div id="all-container">
 
-<% include ./partials/location.ejs %>
+	<% include ./partials/header.ejs %>
 
-<div class="search-form">
+	<main id="body">
 
-<h2>Search Animal By:</h2>
+		<% include ./partials/location.ejs %>
 
-	<form action="/results/search" method="POST">
-		<input type="hidden" name="location" value="<%= location %>">
+		<div class="search-form">
 
-		Category: <select name="animal">
-			<option value="All">All</option>
-			<option value="barnyard">Barn Animals</option>
-			<option value="bird">Bird</option> 
-			<option value="horse">Horse</option>
-			<option value="reptile">Reptiles</option>
-			<option value=""></option>
-		</select>
+		<h2>Search Animal By:</h2>
 
-		Size: <select name="size">
-			<option value="All">All</option>
-			<option value="S">Small</option>
-			<option value="M">Medium</option>
-			<option value="L">Large</option>
-			<option value="XL">X-Large</option>
-		</select>
+			<form action="/results/search" method="POST">
+				<input type="hidden" name="location" value="<%= location %>">
 
-		Gender: <select name="sex">
-			<option value="All">All</option>
-			<option value="M">Male</option>
-			<option value="F">Female</option>
-		</select>
+				Category: <select name="animal">
+					<option value="All">All</option>
+					<option value="barnyard">Barn Animals</option>
+					<option value="bird">Bird</option> 
+					<option value="horse">Horse</option>
+					<option value="reptile">Reptiles</option>
+				</select>
 
-		Age: <select name="age">
-			<option value="All">All</option>
-			<option value="Baby">Baby</option>
-			<option value="Young">Young</option>
-			<option value="Adult">Adult</option>
-			<option value="Senior">Senior</option>
-		</select>
-		<br>
-		<button>Search!</button>
+				Size: <select name="size">
+					<option value="All">All</option>
+					<option value="S">Small</option>
+					<option value="M">Medium</option>
+					<option value="L">Large</option>
+					<option value="XL">X-Large</option>
+				</select>
 
-	</form>
+				Gender: <select name="sex">
+					<option value="All">All</option>
+					<option value="M">Male</option>
+					<option value="F">Female</option>
+				</select>
+
+				Age: <select name="age">
+					<option value="All">All</option>
+					<option value="Baby">Baby</option>
+					<option value="Young">Young</option>
+					<option value="Adult">Adult</option>
+					<option value="Senior">Senior</option>
+				</select>
+				<br>
+				<button>Search!</button>
+
+			</form>
+		</div>
+
+	</main>
+
+	<% include ./partials/footer.ejs %>
+
 </div>
-
-<% include ./partials/footer.ejs %>
 
 </body>
 </html>
