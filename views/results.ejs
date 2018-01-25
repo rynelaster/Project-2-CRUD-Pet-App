@@ -12,99 +12,133 @@
 
 <% include ./partials/location.ejs %>
 
-<div class="results-container">
+<div class="prev-next-container">
 
-	<% if (pets != undefined) { %>
+	<div class="results-button">
+		<form 
 
-		<% for (let i = 0; i < pets.length; i++) { -%>
+		<% if (offset <= 25) { %>
 
-			<div>
+		class="hidden" 
 
-				<a class="results" href="/view/pet/<%= pets[i].id.$t %>">
+		<% } %>
 
-					<div class="result-thumb">
+		action="/results/search/&offset=<% (Math.floor((offset - 1) / 25) * 25) %>" method="POST">
+			<input type="hidden" name="searchStr" value="<%= query %>">
+			<button>&#8592; prev</button>
+		</form>
+	</div>
 
-						<% if (pets[i].media.photos != undefined) { %>
 
-							<% for (let j = 0; j < pets[i].media.photos.photo.length; j++) { -%>
+	<div class="results-container">
 
-								<% if (pets[i].media.photos.photo[0].$t != undefined && pets[i].media.photos.photo[j]['@size'] == 'pn' && pets[i].media.photos.photo[j]['@id'] == 1) { %>
+		<% if (pets != undefined) { %>
 
-									<img src="<%= pets[i].media.photos.photo[j].$t %>">
+			<% for (let i = 0; i < pets.length; i++) { -%>
 
-								<% } %>
+				<div>
 
-							<% } -%>
+					<a class="results" href="/view/pet/<%= pets[i].id.$t %>">
 
-						<% } else if (pets[i].media.photos == undefined && pets[i].animal.$t == 'Dog') { %>
+						<div class="result-thumb">
 
-							<img src="/img/defaultdog.png">
+							<% if (pets[i].media.photos != undefined) { %>
 
-						<% } else { %>
+								<% for (let j = 0; j < pets[i].media.photos.photo.length; j++) { -%>
 
-							<img src="/img/defaultcat.png">
+									<% if (pets[i].media.photos.photo[0].$t != undefined && pets[i].media.photos.photo[j]['@size'] == 'pn' && pets[i].media.photos.photo[j]['@id'] == 1) { %>
 
-						<% } %>
+										<img src="<%= pets[i].media.photos.photo[j].$t %>">
 
-					</div>
-			
-					<div class="results-detail">
+									<% } %>
 
-						<div class="results-name"><%= pets[i].name.$t %></div>
+								<% } -%>
 
-						<div class="results-age-gender"> 
+							<% } else if (pets[i].media.photos == undefined && pets[i].animal.$t == 'Dog') { %>
 
-							<%= pets[i].age.$t %>, <% if (pets[i].sex.$t == 'm') { %> Male <% } else { %> Female <% } %>
-							
-						</div>
+								<img src="/img/defaultdog.png">
 
-						<div class="breed"> 
+							<% } else { %>
 
-						<% if (Array.isArray(pets[i].breeds.breed) == true) { %> 
+								<img src="/img/defaultcat.png">
 
-							<% for (let k = 0; k < pets[i].breeds.breed.length; k++) { -%>
-
-								<%= pets[i].breeds.breed[k].$t %><% if (k < pets[i].breeds.breed.length - 1) { %>, <% } %>
-
-							<% } -%>
-
-						<% } else { %>
-
-							<%= pets[i].breeds.breed.$t %>
-
-						<% } %>
+							<% } %>
 
 						</div>
+				
+						<div class="results-detail">
 
-						<div class="results-last-update">
-							
-							Last updated: <%= pets[i].lastUpdate.$t.slice(0, 10) %>
+							<div class="results-name"><%= pets[i].name.$t %></div>
 
+							<div class="results-age-gender"> 
+
+								<%= pets[i].age.$t %>, <% if (pets[i].sex.$t == 'm') { %> Male <% } else { %> Female <% } %>
+								
+							</div>
+
+							<div class="breed"> 
+
+							<% if (Array.isArray(pets[i].breeds.breed) == true) { %> 
+
+								<% for (let k = 0; k < pets[i].breeds.breed.length; k++) { -%>
+
+									<%= pets[i].breeds.breed[k].$t %><% if (k < pets[i].breeds.breed.length - 1) { %>, <% } %>
+
+								<% } -%>
+
+							<% } else { %>
+
+								<%= pets[i].breeds.breed.$t %>
+
+							<% } %>
+
+							</div>
+
+							<div class="results-last-update">
+								
+								Last updated: <%= pets[i].lastUpdate.$t.slice(0, 10) %>
+
+							</div>
 						</div>
-					</div>
-				</a>
+					</a>
+				</div>
+			<% } -%>
+
+			<!-- <div class="change-results">
+
+				<div class="change-view">
+					&#8592; prev 
+				</div>
+
+				<div class="change-view">
+					next &#8594;
+
+				</div>
+			</div> -->
+		<% } else { %>
+
+			<div class="no-results">
+				
+				Sorry, no results. <a href="/refine/search">Search again?</a>
+
 			</div>
-		<% } -%>
+		<% } %>
+	</div>
 
-		<div class="change-results">
+	<div class="results-button">
+		<form 
 
-			<div class="change-view">
-				&#8592; prev 
-			</div>
+		<% if (offset % 25 != 0) { %>
 
-			<div class="change-view">
-				next &#8594;
+		class="hidden" 
 
-			</div>
-		</div>
-	<% } else { %>
+		<% } %>
 
-		<div class="no-results">
-			
-			Sorry, no results. <a href="/refine/search">Search again?</a>
-
-		</div>
-	<% } %>
+		action="/results/search/&offset=<%= offset %>" method="POST">
+			<input type="hidden" name="searchStr" value="<%= query %>">
+			<button>next &#8594;</button>
+		</form>
+	</div>
 </div>
 
 <% include ./partials/footer.ejs %>

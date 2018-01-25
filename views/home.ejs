@@ -12,6 +12,8 @@
 
 <section class="home-search">
 
+	<p> <%= errlocation %> </p>
+
 	<% if (!location) { %>
 
 	<p>A location in the form of a ZIP code is required to search for pets! <br>
@@ -54,7 +56,7 @@
 	<% let bgrandomize = Math.floor(Math.random() * xPhotos.length) %>
 
 	<% if (bgrandomize == 0 && xPhotos.length > 1) { bgrandomize = 1 } %>
-	
+
 	<%= xPhotos[bgrandomize] %>)">
 
 	<div class="splash-container">

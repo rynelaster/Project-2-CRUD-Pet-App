@@ -18,6 +18,9 @@ button {
 input {
 	font-family: 'Georgia';
 }
+.hidden {
+	display: none;
+}
 
 
 /* home.ejs */
@@ -90,11 +93,19 @@ input {
 }
 
 /* results */
+.prev-next-container {
+	display: flex;
+	justify-content: center;
+	margin: 0 auto;
+	margin-top: 10px;
+}
+.results-button {
+	margin: 0px 10px 0px 10px;
+	width: 70px;
+}
 .results-container {
 	display: flex;
 	flex-wrap: wrap;
-	margin: 0 auto;
-	margin-top: 10px;
 	height: 600px;
 	width: 1000px;
 	overflow-y: scroll;

@@ -57,7 +57,8 @@ app.get('/', (req, res) => {
 				data: json.petfinder.pet,
 				location: req.session.location,
 				logged: req.session.logged,
-				username: req.session.username
+				username: req.session.username,
+				errlocation: req.session.errlocation
 			})
 		}
 	})
@@ -84,25 +85,72 @@ app.post('/results/search', (req, res) => {
 		if (err) {
 			console.error(err);
 		}
-		const json = JSON.parse(foundPets)
-		
-		// console.log(json.petfinder.lastOffset.$t)
+		else {
 
-		res.render('results.ejs', {
+			const json = JSON.parse(foundPets);
 
-			pets: json.petfinder.pets.pet,
-			location: req.session.location,
-			logged: req.session.logged,
-			username: req.session.username,
-			query: searchStr
-		})
+			console.log(json.petfinder.lastOffset.$t);
 
+			if (json.petfinder.pets != undefined) {
+
+				// console.log(json.petfinder.lastOffset.$t)
+
+				res.render('results.ejs', {
+
+					pets: json.petfinder.pets.pet,
+					location: req.session.location,
+					logged: req.session.logged,
+					username: req.session.username,
+					offset: json.petfinder.lastOffset.$t,
+					query: searchStr
+				})
+			}
+			else {
+
+				req.session.location = '';
+
+				req.session.errlocation = 'Your location is invalid. Please enter a valid location.'
+
+				res.redirect('/');
+			}
+		}
 	})
 
 })
 
 
+app.post('/results/search/:id', (req, res) => {
+
+	const searchStr = req.body.searchStr;
+
+	request(searchStr + req.params.id, (err, response, foundPets) => {
+
+		if (err) {
+			console.error(err);
+		}
+		else {
+
+			const json = JSON.parse(foundPets);
+
+			console.log(json.petfinder.lastOffset.$t);
+
+			res.render('results.ejs', {
+
+				pets: json.petfinder.pets.pet,
+				location: req.session.location,
+				logged: req.session.logged,
+				username: req.session.username,
+				offset: json.petfinder.lastOffset.$t,
+				query: searchStr
+			})
+		}
+	})
+})
+
+
 app.get('/refine/search', (req, res) => {
+
+	req.session.errlocation = '';
 
 	if (!req.session.location) {
 
@@ -120,6 +168,8 @@ app.get('/refine/search', (req, res) => {
 
 
 app.post('/refine/search', (req, res) => {
+
+	req.session.errlocation = '';
 
 	if (!req.session.location) {
 

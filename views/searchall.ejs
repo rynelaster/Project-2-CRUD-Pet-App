@@ -19,6 +19,15 @@
 	<form action="/results/search" method="POST">
 		<input type="hidden" name="location" value="<%= location %>">
 
+		Category: <select name="animal">
+			<option value="All">All</option>
+			<option value="barnyard">Barn Animals</option>
+			<option value="bird">Bird</option> 
+			<option value="horse">Horse</option>
+			<option value="reptile">Reptiles</option>
+			<option value=""></option>
+		</select>
+
 		Size: <select name="size">
 			<option value="All">All</option>
 			<option value="S">Small</option>
