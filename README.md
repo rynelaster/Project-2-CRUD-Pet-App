@@ -39,6 +39,9 @@ The high level goal for this app is to help connect the user with a place where 
 #### __js / css / html__
 - **General** web building tools and applications
 
+#### __Petfinder API__
+- **Pet adoption** database (https://www.petfinder.com/developers/api-docs)
+
 
 ### Wireframes and user flow work
 #### __Original idea considerations__

@@ -20,7 +20,7 @@
 
 			<% if (!location) { %>
 
-			<p>A location in the form of a ZIP code is required to search for pets! <br>
+			<p>A location in the form of either a ZIP code or 'City, State' is required to search for pets! <br>
 			Please enter your location to search:</p>
 
 			<form action="/refine/search" method="POST">
@@ -30,7 +30,7 @@
 
 			<% } else { %>
 
-			<p>You are currently searching using the ZIP code <%= location %>. Click <a href="/clearloc">here</a> to change your search location.</p>
+			<p>You are currently searching with location: <%= location %>. Click <a href="/clearloc">here</a> to change your search location.</p>
 
 			<form action="/refine/search" method="POST">
 				<button>Find the perfect animal!</button>
@@ -89,6 +89,7 @@
 	<% include ./partials/footer.ejs %>
 
 </div>
+
 
 </body>
 </html>

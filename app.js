@@ -94,8 +94,6 @@ app.post('/results/search', (req, res) => {
 
 			const json = JSON.parse(foundPets);
 
-			console.log(json.petfinder.lastOffset.$t);
-
 			if (json.petfinder.pets != undefined) {
 
 				// console.log(json.petfinder.lastOffset.$t)
@@ -255,7 +253,7 @@ app.get('/view/pet/:id', (req, res)=>{
 
 	request('http://api.petfinder.com/pet.get?format=json&key=4514687905f37186817bdb9967ab8c9f&id=' + req.params.id, (err, response, foundAnimal) => {
 
-		let json = JSON.parse(foundAnimal);
+		const json = JSON.parse(foundAnimal);
 		// console.log(json);
 		console.log('------------------------------------------')
 		console.log(json.petfinder.pet, ' this is data object')
@@ -270,7 +268,56 @@ app.get('/view/pet/:id', (req, res)=>{
 			username: req.session.username
 		})
 	})
-});
+})
+
+
+
+app.get('/shelter/search', (req, res) => {
+
+	request('http://api.petfinder.com/shelter.find?format=json&key=4514687905f37186817bdb9967ab8c9f&location=' + req.session.location, (err, response, foundShelters) => {
+		if (err) {
+			console.error(err)
+		}
+		else {
+
+			const json = JSON.parse(foundShelters);
+			// res.send(json.petfinder);
+			res.render('shelterResults.ejs', {
+
+				shelters: json.petfinder.shelters,
+				location: req.session.location,
+				logged: req.session.logged,
+				username: req.session.username
+			})
+		}
+	})
+})
+
+
+
+app.get('/view/shelter/:id', (req, res) => {
+
+	request('http://api.petfinder.com/shelter.get?format=json&key=4514687905f37186817bdb9967ab8c9f&id=' + req.params.id, (err, response, foundShelter) => {
+		if (err) {
+			console.error(err)
+		}
+		else {
+
+			const json = JSON.parse(foundShelter)
+
+			// res.send(json.petfinder);
+
+			res.render('showShelter.ejs', {
+
+				shelter: json.petfinder.shelter,
+				location: req.session.location,
+				logged: req.session.logged,
+				username: req.session.username
+			})
+		}
+
+	})
+})
 
 
 

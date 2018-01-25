@@ -3,14 +3,93 @@
 <head>
 	<title>Shelter</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Boogaloo|Mogra" rel="stylesheet">
 </head>
-<body>
+<body onload="loadmap()">
 
-<div id="pet-listings"></div>
+<div id="all-container">
+	
+	<% include ./partials/header.ejs %>
+
+	<main id="body">
+
+		<% include ./partials/location.ejs %>
+		
+		<div class="shelter-container">
+
+				<div id="map"></div>
+
+				<div class="shelter-display">
+					
+					<div class="shelter-information"> 
+
+						<div class="shelter-view-name">
+
+							<%= shelter.name.$t %>
+							
+						</div>
+
+					</div>
+
+					<div class="show-these-pets"> show these pets </div>
+
+				</div>
+		</div>
+
+	</main>
+
+	<% include ./partials/footer.ejs %>
+
+</div>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLK3TbM3Z3YSSRI7DjhjHrhb736O7-tZU&libraries=places"></script>
+<script>
+	let map;
+
+	const loadmap = () => {
+		const mapOptions = {
+			center: new google.maps.LatLng(<%= shelter.latitude.$t %>, <%= shelter.longitude.$t %>),
+			zoom: 11
+		}
+		map = new google.maps.Map(document.getElementById('map'),
+			mapOptions);
+
+		const geocoder = new google.maps.Geocoder;
+
+		const latlng = {lat: <%= shelter.latitude.$t %>, lng: <%= shelter.longitude.$t %>};
+
+		geocoder.geocode({'location': latlng}, function(results, status) {
+
+    		if (status === google.maps.GeocoderStatus.OK) {
+
+      			if (results[1]) {
+
+        			console.log(results[1].place_id);
+
+        			const service = new google.maps.places.PlacesService(map);
+
+        			service.getDetails({ placeId: results[1].place_id }, (place, status) => {
+
+        				if (status === google.maps.places.PlacesServiceStatus.OK) {
+        					const marker = new google.maps.Marker({
+        						map: map,
+        						position: place.geometry.location
+        					});
+        				}
+        			})
 
 
+      			} 
+      			else {
 
-<script type="text/javascript" src="/js/showShelter.js"></script>
+        			window.alert('No results found');
+      			}
+    		} 
+    		else {
+
+      			window.alert('Geocoder failed due to: ' + status);
+    		}
+  		});
+	}
+</script>
 </body>
 </html>
