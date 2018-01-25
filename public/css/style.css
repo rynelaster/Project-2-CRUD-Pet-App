@@ -191,20 +191,48 @@ input {
 }
 
 /*Show Pets Page */
-.pets-page {
+.pets-page-container {
+	/*display: flex;*/
+	/*flex-wrap: wrap;*/
+	height: 600px;
+	width: 800px;
+	overflow-y: scroll;
+	box-shadow: 1px 1px 7px;
+	background-color: white;
+	/*justify-content: flex-start;*/
+	margin-left: auto; 
+	margin-right: auto;
+}
 
+.pet-detail-container{
+	display: inline-block;
+	width: 400px;
 }
 
 .pet-photos-container {
+	/*vertical-align: top;*/
+	display: inline-block;
+	height: 275px;
+	width: 390px; 
+	text-align: center;
 
 }
-
-.pets-info-container{
-
+.pet-photos-container img {
+	max-width: 100%;
+	height: auto;
+	max-height: 100%;
+	vertical-align: top;
 }
 
-.pets-contact-container {
+#pet-info-container{
+	padding: 10px;
+}
 
+#pet-contact-container {
+	vertical-align: top;
+	display: inline-block;
+	width: 380px;
+	padding: 10px;	
 }
 
 .hidden {

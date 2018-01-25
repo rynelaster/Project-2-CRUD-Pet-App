@@ -10,10 +10,11 @@
 
 <% include ./partials/header.ejs %>
 
-	<button id="left">Previous</button>
-	<button id="right">Next</button>
 
-<div class="pets-page">
+
+<div class="pets-page-container">
+
+	<div class="photosandinfo">
 
 	<div class="pet-photos-container">
 
@@ -39,22 +40,27 @@
 
 		%>
 	</div>
+		<div id="pet-contact-container">Contact:
+			<li>Phone Number: <%=data.contact.phone.$t%></li>
+			<li>Address: <%=data.contact.address1.$t%></li>
+			<li>City: <%=data.contact.city.$t%></li>
+			<li>Zip: <%=data.contact.zip.$t%></li>
+		</div>
 
-<div class="pet-info-container">
-	<%=data.breeds.breed.$t%>
-	<%=data.name.$t%>
-	<%=data.sex.$t%>
-	<%=data.id.$t%>
-	<%=data.shelterId.$t%>
-	<%=data.description.$t%>
 </div>
+		<button id="left">Previous</button>
+		<button id="right">Next</button>
+		
+	<div id="pet-info-container">Info:
+		<li>Breed: <%=data.breeds.breed.$t%></li>
+		<li>Name: <%=data.name.$t%></li>
+		<li>Sex: <%=data.sex.$t%></li>
+		<li>Id: <%=data.id.$t%></li>
+		<li>Shelter: <%=data.shelterId.$t%></li> <br />
+		<%=data.description.$t%>
+	</div>
 
-<div class="pet-contact-container">
-	<%=data.contact.phone.$t%>
-	<%=data.contact.address1.$t%>
-	<%=data.contact.city.$t%>
-	<%=data.contact.zip.$t%>
-</div>
+
 
 </div>
 
