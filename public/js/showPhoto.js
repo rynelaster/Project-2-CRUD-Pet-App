@@ -16,7 +16,13 @@ document.getElementById('animal-photo-0').classList.remove('hidden');
 document.getElementById('left').addEventListener('click', ()=>{
 	console.log('hit left')
 
-	//
+	document.getElementById('animal-photo-' + photoShowingNow).classList.add('hidden');
+
+		// increase value of photoShowingNow
+		photoShowingNow = photoShowingNow - 1; // photoShowingNow++ 
+
+		// show photoShowingNow 
+		document.getElementById('animal-photo-' + photoShowingNow).classList.remove('hidden')
 
 
 
