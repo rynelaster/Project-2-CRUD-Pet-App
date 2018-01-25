@@ -15,7 +15,7 @@ This app will use the Petfinder API to source adoption agencies local to the use
 The high level goal for this app is to help connect the user with a place where they can find, research, and adopt animals that are in need of 'forever' homes from shelters in their area.
 
 
-- The user will be able to search for animals by species, breed, and assorted others options (housetrained, age, etc)
+- The user will be able to search for animals by species, breed, age, and assorted others options (housetrained, age, etc)
 
 
 - The user will be able to save pets they have viewed to track them, similar to many retail/ecommerce sites shopping cart functionality
@@ -24,4 +24,4 @@ The high level goal for this app is to help connect the user with a place where 
 - The user will be able to access the contact information of the location (shelter, breeder) of a pet
 
 
-- The user will be able to authorize use of their location to show nearby shelters	
+- The user will be able to provide their location to filter to local results and show nearby shelters	
