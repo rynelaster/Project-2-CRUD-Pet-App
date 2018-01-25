@@ -52,6 +52,11 @@ app.get('/', (req, res) => {
 
 			const json = JSON.parse(body);
 
+			if (!json.petfinder.pet.media.photos) {
+
+				res.redirect('/');
+			}
+
 			res.render('home.ejs', {
 
 				data: json.petfinder.pet,
