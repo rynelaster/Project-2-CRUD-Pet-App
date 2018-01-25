@@ -3,26 +3,32 @@
 <head>
 	<title>show pet</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Boogaloo|Mogra" rel="stylesheet">
 </head>
 <body>
 
 <% include ./partials/header.ejs %>
 
+	<button id="left">Previous</button>
+	<button id="right">Next</button>
+
 <div class="pets-page">
 
 	<div class="pet-photos-container">
 
 		<% 
-		let photoNum = 0;
+		// variable to count the number of photos (with "x")
+		let photoNum = 1;
+
 		for (let i = 0; i < data.media.photos.photo.length; i++) { 
 
-
+			// this selects the photos that we want (photos with"x")
 			if (data.media.photos.photo[i]["@size"] === "x") {
 
 				%> 
 
-				<img class="image-overlay hidden" id="animal-photo-<%= photoNum %>" src="<%= data.media.photos.photo[i].$t %>">
+				<img class="image-overlay hidden animal-picture" id="animal-photo-<%= photoNum %>" src="<%= data.media.photos.photo[i].$t %>">
 				<%
 				photoNum++
 
@@ -33,9 +39,6 @@
 
 		%>
 	</div>
-
-	<button id="left">Previous</button>
-	<button id="right">Next</button>
 
 <div class="pet-info-container">
 	<%=data.breeds.breed.$t%>

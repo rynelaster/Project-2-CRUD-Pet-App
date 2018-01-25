@@ -218,6 +218,27 @@ app.get('/view/pet/:id', (req, res)=>{
 });
 
 
+app.get('/pet/images/:id', (req, res) => {
+		request('http://api.petfinder.com/pet.get?format=json&key=4514687905f37186817bdb9967ab8c9f&id=' + req.params.id, (err, response, foundAnimal) => {
+
+		let json = JSON.parse(foundAnimal);
+		// console.log(json);
+		console.log('------------------------------------------')
+		console.log(json.petfinder.pet, ' this is data object')
+		
+		console.log('------------------------------------------')
+
+		// res send the array of images
+	
+	})
+
+
+
+
+})
+
+
+
 
 app.get('/shelter', (req, res) => {
 
