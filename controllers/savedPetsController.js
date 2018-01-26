@@ -5,7 +5,7 @@ const User = require('../models/users.js');
 
 
 
-
+//get route for displaying saved pets, pretty simple because unless you type the route manually into the address bar, theres no way to access this page without being logged in first. finds the logged in user and populates the data based on what is stored in that user's saved pets array
 router.get('/', (req, res) => {
 
 	User.findOne({username: req.session.username}, (err, foundUser) => {
@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
 	})
 })
 
-
+//delete route for removing objects from the saved pets mongodb collection and the logged in user's saved pets array
 router.delete('/:id', (req, res) => {
 
 	SavedPets.findByIdAndRemove(req.params.id, (err, removedSaved) => {
