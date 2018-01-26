@@ -53,7 +53,7 @@ app.get('/', (req, res) => {
 
 	req.session.saveAlert = '';
 
-	request('http://api.petfinder.com/pet.getRandom?format=json&key=4514687905f37186817bdb9967ab8c9f&output=basic', (err, response, body) => {
+	request('http://api.petfinder.com/pet.getRandom?format=json&key='+ API_KEY +'&output=basic', (err, response, body) => {
 		if (err) {
 
 			console.error(err);
@@ -85,7 +85,7 @@ app.post('/results/search', (req, res) => {
 
 	let searchObj = req.body;
 
-	let searchStr = 'http://api.petfinder.com/pet.find?format=json&key=4514687905f37186817bdb9967ab8c9f';
+	let searchStr = 'http://api.petfinder.com/pet.find?format=json&key='+ API_KEY;
 
 	for (let key in searchObj) {
 		if (searchObj[key] != 'All' && searchObj[key] != '') {
@@ -228,7 +228,7 @@ app.get('/search/:id', (req, res) => {
 
 		let species = req.params.id;
 
-		request('http://api.petfinder.com/breed.list?format=json&key=4514687905f37186817bdb9967ab8c9f&animal='+ species, (err, response, foundBreeds) => {
+		request('http://api.petfinder.com/breed.list?format=json&key='+ API_KEY +'&animal='+ species, (err, response, foundBreeds) => {
 			if (err) {
 
 				console.error(err);
@@ -268,7 +268,7 @@ app.get('/clearloc', (req, res) => {
 //  Route for showing animals when clicked on from SRP(search results page) using the pet get api method
 app.get('/view/pet/:id', (req, res)=>{
 
-	request('http://api.petfinder.com/pet.get?format=json&key=4514687905f37186817bdb9967ab8c9f&id=' + req.params.id, (err, response, foundAnimal) => {
+	request('http://api.petfinder.com/pet.get?format=json&key='+ API_KEY +'&id=' + req.params.id, (err, response, foundAnimal) => {
 
 		const json = JSON.parse(foundAnimal);
 
@@ -301,7 +301,7 @@ app.get('/view/pet/:id', (req, res)=>{
 //the save-a-pet post route, uses the pet's :id to append to pet get query, then finds the currently logged user and creates a new Saved Pet model. that model is pushed into the current users saved pets array and saved.
 app.post('/view/pet/:id', (req, res) => {
 
-	request('http://api.petfinder.com/pet.get?format=json&key=4514687905f37186817bdb9967ab8c9f&id=' + req.params.id, (err, response, foundAnimal) => {
+	request('http://api.petfinder.com/pet.get?format=json&key='+ API_KEY +'&id=' + req.params.id, (err, response, foundAnimal) => {
 
 		const json = JSON.parse(foundAnimal);
 		// console.log(json);
@@ -339,7 +339,7 @@ app.post('/view/pet/:id', (req, res) => {
 //route for browsing local shelters by name. uses the shelter find method of the api, appending session location to the query. checks against valid locations and redirects in the instace of a fail
 app.get('/shelter/search', (req, res) => {
 
-	request('http://api.petfinder.com/shelter.find?format=json&key=4514687905f37186817bdb9967ab8c9f&location=' + req.session.location, (err, response, foundShelters) => {
+	request('http://api.petfinder.com/shelter.find?format=json&key='+ API_KEY +'&location=' + req.session.location, (err, response, foundShelters) => {
 		if (err) {
 			console.error(err)
 		}
@@ -373,7 +373,7 @@ app.get('/shelter/search', (req, res) => {
 //the view individual shelter route, using the shelter get api method. the ejs page this renders, 'showShelter.ejs', also has script tags on it implementing google maps, google geocode, and google places to generate a map with the shelters' location marked. this route also calls the shelter getpets api method to populate a mini display box within the shelter view container with some pets located at the shelter
 app.get('/view/shelter/:id', (req, res) => {
 
-	request('http://api.petfinder.com/shelter.get?format=json&key=4514687905f37186817bdb9967ab8c9f&id=' + req.params.id, (err, response, foundShelter) => {
+	request('http://api.petfinder.com/shelter.get?format=json&key='+ API_KEY +'&id=' + req.params.id, (err, response, foundShelter) => {
 		if (err) {
 			console.error(err)
 		}
@@ -383,7 +383,7 @@ app.get('/view/shelter/:id', (req, res) => {
 
 			// res.send(json.petfinder.shelter);
 
-			request('http://api.petfinder.com/shelter.getPets?format=json&key=4514687905f37186817bdb9967ab8c9f&count=5&id=' + req.params.id, (err, response, foundPets) => {
+			request('http://api.petfinder.com/shelter.getPets?format=json&key='+ API_KEY +'&count=5&id=' + req.params.id, (err, response, foundPets) => {
 
 				if (err) {
 
@@ -412,7 +412,7 @@ app.get('/view/shelter/:id', (req, res) => {
 
 //
 app.get('/pet/images/:id', (req, res) => {
-		request('http://api.petfinder.com/pet.get?format=json&key=4514687905f37186817bdb9967ab8c9f&id=' + req.params.id, (err, response, foundAnimal) => {
+		request('http://api.petfinder.com/pet.get?format=json&key='+ API_KEY +'&id=' + req.params.id, (err, response, foundAnimal) => {
 
 		let json = JSON.parse(foundAnimal);
 		// console.log(json);
