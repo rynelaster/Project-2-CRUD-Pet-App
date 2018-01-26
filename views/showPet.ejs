@@ -77,6 +77,10 @@
 	</div>
 
 	<div class="save-this-pet">
+			
+		<div>
+			<%= saveAlert %>
+		</div>
 
 		<form action="/view/pet/<%= data.id.$t %>" method="POST">
 			<input type="hidden" name="id" value="<%= data.id.$t %>">

@@ -58,6 +58,12 @@
 
 					<div class="show-these-pets">
 
+						<% if (pets == undefined) { %>
+
+						<div id="no-pets">No pets found at this shelter.</div>
+
+						<% } else { %>
+
 						<% for (let i = 0; i < pets.length; i++) { -%>
 							
 						<div>
@@ -129,6 +135,8 @@
 						</div>
 
 						<% } -%>
+
+					<% } %>
 
 					</div>
 
