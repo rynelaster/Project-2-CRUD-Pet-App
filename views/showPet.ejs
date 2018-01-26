@@ -4,7 +4,7 @@
 	<title>show pet</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-	<link href="https://fonts.googleapis.com/css?family=Boogaloo|Mogra" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Boogaloo|Mogra |Josefin Sans" rel="stylesheet">
 </head>
 <body>
 
@@ -13,6 +13,9 @@
 
 
 <div class="pets-page-container">
+	<div class="name-container">
+		<span class="name"> <%=data.name.$t%> </span>
+	</div>
 
 	<div class="photosandinfo">
 
@@ -47,7 +50,7 @@
 			<li>Zip: <%=data.contact.zip.$t%></li>
 		</div>
 
-</div>
+	</div>
 		<button id="left">Previous</button>
 		<button id="right">Next</button>
 		

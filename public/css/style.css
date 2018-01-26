@@ -259,6 +259,21 @@ input {
 	margin-right: auto;
 }
 
+span {
+	display: inline-block;
+	text-align: center;
+	font-family: Josefin Sans;
+	font-size: 40px;
+	padding : 15px;
+	border-style: outset;
+	margin: 5px;
+
+}
+
+.name-container {
+	text-align: center;
+}
+
 .pet-detail-container{
 	display: inline-block;
 	width: 400px;
@@ -270,6 +285,7 @@ input {
 	height: 275px;
 	width: 390px; 
 	text-align: center;
+	/*border: 1px solid;*/
 
 }
 .pet-photos-container img {
@@ -277,18 +293,28 @@ input {
 	height: auto;
 	max-height: 100%;
 	vertical-align: top;
+
 }
 
 #pet-info-container{
 	padding: 10px;
+	font-family: Georgia;
+	/*border: 1px solid;*/
 }
 
 #pet-contact-container {
 	vertical-align: top;
 	display: inline-block;
 	width: 380px;
-	padding: 10px;	
+	padding: 10px;
+	font-family: Georgia;
+	/*border: 1px solid;*/
+	font-size: 22px;
+	text-align: center;
 }
+
+
+
 
 .hidden {
 	display: none;
