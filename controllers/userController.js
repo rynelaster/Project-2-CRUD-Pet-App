@@ -3,12 +3,9 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/users.js');
 
-//remember to require the savedPets Model here
 
 
-
-
-//LOGIN route
+//login route to render the page
 router.get('/login', (req, res)=>{
 
 	res.render('login.ejs', {
@@ -20,6 +17,8 @@ router.get('/login', (req, res)=>{
 	})
 })
 
+
+//the login form posts to this route, checking the database for a user object with a matching name and checking the pw with bcrypt
 router.post('/login', (req, res)=>{
 
 	User.findOne({username: req.body.username}, (err, user)=>{
@@ -48,7 +47,7 @@ router.post('/login', (req, res)=>{
 	})
 })
 
-// LOGOUT
+// log out route that simply destroys session data and redirects home
 router.get('/logout', (req, res)=>{
 	req.session.destroy((err)=>{
 		if (err) {
@@ -62,7 +61,7 @@ router.get('/logout', (req, res)=>{
 })
 
 
-// REGISTRATION ROUTE
+// registration route to display the register page
 router.get('/registration', (req, res)=>{
 
 	// console.log(req.session)
@@ -75,6 +74,7 @@ router.get('/registration', (req, res)=>{
 })
 
 
+//creates a user model
 router.post('/registration', (req, res)=>{
 
 	const password = req.body.password;

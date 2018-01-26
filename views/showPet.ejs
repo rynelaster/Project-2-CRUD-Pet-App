@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>show pet</title>
+	<title>Show pet</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Boogaloo|Mogra |Josefin Sans" rel="stylesheet">
@@ -10,7 +10,7 @@
 
 <% include ./partials/header.ejs %>
 
-
+<% include ./partials/location.ejs %>
 
 <div class="pets-page-container">
 	<div class="name-container">
@@ -66,6 +66,22 @@
 
 
 </div>
+
+<div>
+	<%= saveAlert %>
+</div>
+
+<form action="/view/pet/<%= data.id.$t %>" method="POST">
+	<input type="hidden" name="id" value="<%= data.id.$t %>">
+	<input type="hidden" name="shelterId" value="<%= data.shelterId.$t %>">
+	<input type="hidden" name="name" value="<%= data.name.$t %>">
+	<input type="hidden" name="photo" value="<%= data.media.photos.photo[2].$t %>">
+	<input type="hidden" name="age" value="<%= data.age.$t %>">
+	<input type="hidden" name="animal" value="<%= data.animal.$t %>">
+	<input type="hidden" name="breed" value="<%= data.breeds.breed.$t %>">
+	<input type="hidden" name="sex" value="<%= data.sex.$t %>">
+	<button>Save this pet</button>
+</form>
 
 <% include ./partials/footer.ejs %>
 

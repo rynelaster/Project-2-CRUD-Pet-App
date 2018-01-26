@@ -1,3 +1,17 @@
 <section class="result-search">
-	<p>You are currently searching using location: <%= location %>. Click <a href="/clearloc">here</a> to change your search location.</p>
+
+	<p>You 
+
+		<% if (location != undefined && location != '') { %>
+
+		are currently searching using location: <%= location %>. 
+
+		<% } else { %>
+
+		haven't set a search location!
+
+		<% } %>
+
+		Click <a href="/clearloc">here</a> to adjust your search location.</p>
+
 </section>

@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 
 const savedPetsSchema = new mongoose.Schema({
-	petId: String,
+	id: String,
 	shelterId: String,
 	name: String,
 	photo: String,
-	age: Number,
-	species: String,
+	age: String,
+	animal: String,
 	breed: String,
-	gender: String
+	sex: String
 })
 
 const SavedPets = mongoose.model('SavedPets', savedPetsSchema);

@@ -14,7 +14,59 @@
 
 	<main id="body">
 
-		<h1>ur pets are saved here at some point</h1>
+		<% include ./partials/location.ejs %>
+
+		<h1>Your saved pet profiles:</h1>
+
+		<div class="saved-pet-container">
+
+			<% if (saved.length == 0) { %>
+
+			<div class="no-saved"> Looks like you don't have any saved pets! Better get <a href="/">searching!</a> </div>
+
+			<% } %>
+			
+			<% for (let i = 0; i < saved.length; i++) { -%>
+				
+			<a href="/view/pet/<%= saved[i].id %>" class="saved-pet">
+				
+				<div class="saved-pic">
+					
+					<img src="<%= saved[i].photo %>">
+
+				</div>
+
+				<div class="saved-info-top">
+
+					<div class="saved-info">
+						
+						<div class="saved-name"> <%= saved[i].name %> </div>
+
+						<div class="saved-detail">
+
+							<%= saved[i].age %>, <% if (saved[i].sex == 'm') { %> Male <% } else { %> Female <% } %> <br>
+
+							<%= saved[i].breed %> <%= saved[i].animal %>
+
+						</div>
+
+					</div>
+
+					<div class="delete-saved">
+						
+						<form action="/savedpets/<%= saved[i]._id %>?_method=DELETE" method="POST">
+							<button>Remove from saved</button>
+						</form>
+
+					</div>
+
+				</div>
+
+			</a>
+
+			<% } -%>
+
+		</div>
 
 	</main>
 
