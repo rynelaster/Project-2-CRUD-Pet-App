@@ -68,16 +68,12 @@
 			<%=data.description.$t%>
 		</div>
 
-
-
 	</div>
 
-	<div>
-		<%= saveAlert %>
-	</div>
+	<% if (logged) { %>
 
 	<div class="save-this-pet">
-			
+
 		<div>
 			<%= saveAlert %>
 		</div>
@@ -95,6 +91,8 @@
 		</form>
 
 	</div>
+
+	<% } %>
 
 	</main>
 
