@@ -401,7 +401,8 @@ app.get('/view/shelter/:id', (req, res) => {
 						pets: petsJson.petfinder.pets.pet,
 						location: req.session.location,
 						logged: req.session.logged,
-						username: req.session.username
+						username: req.session.username,
+						googleapi: process.env.API_KEY_TWO
 					})
 				}
 			})
