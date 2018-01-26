@@ -260,7 +260,7 @@ input {
 	margin-right: auto;
 }
 
-.name-container span {
+.name-container a {
 	display: inline-block;
 	text-align: center;
 	font-family: Josefin Sans;
@@ -268,8 +268,10 @@ input {
 	padding : 15px;
 	border-style: outset;
 	margin: 5px;
+	color: black;
 
 }
+
 
 .save-this-pet {
 	margin: 0 auto;
