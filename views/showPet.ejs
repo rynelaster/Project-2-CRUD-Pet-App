@@ -2,89 +2,101 @@
 <html>
 <head>
 	<title>Show pet</title>
+	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Boogaloo|Mogra |Josefin Sans" rel="stylesheet">
 </head>
 <body>
 
-<% include ./partials/header.ejs %>
+<div id="all-container">
 
-<% include ./partials/location.ejs %>
+	<% include ./partials/header.ejs %>
 
-<div class="pets-page-container">
-	<div class="name-container">
-		<span class="name"> <%=data.name.$t%> </span>
-	</div>
+	<main id="body">
 
-	<div class="photosandinfo">
+	<% include ./partials/location.ejs %>
 
-	<div class="pet-photos-container">
-
-		<% 
-		// variable to count the number of photos (with "x")
-		let photoNum = 1;
-
-		for (let i = 0; i < data.media.photos.photo.length; i++) { 
-
-			// this selects the photos that we want (photos with"x")
-			if (data.media.photos.photo[i]["@size"] === "x") {
-
-				%> 
-
-				<img class="image-overlay hidden animal-picture" id="animal-photo-<%= photoNum %>" src="<%= data.media.photos.photo[i].$t %>">
-				<%
-				photoNum++
-
-			} // end if this is an x  
-
-		} // for 
-
-
-		%>
-	</div>
-		<div id="pet-contact-container">Contact:
-			<li>Phone Number: <%=data.contact.phone.$t%></li>
-			<li>Address: <%=data.contact.address1.$t%></li>
-			<li>City: <%=data.contact.city.$t%></li>
-			<li>Zip: <%=data.contact.zip.$t%></li>
+	<div class="pets-page-container">
+		<div class="name-container">
+			<span class="name"> <%=data.name.$t%> </span>
 		</div>
 
-	</div>
-		<button id="left">Previous</button>
-		<button id="right">Next</button>
-		
-	<div id="pet-info-container">Info:
-		<li>Breed: <%=data.breeds.breed.$t%></li>
-		<li>Name: <%=data.name.$t%></li>
-		<li>Sex: <%=data.sex.$t%></li>
-		<li>Id: <%=data.id.$t%></li>
-		<li>Shelter: <%=data.shelterId.$t%></li> <br />
-		<%=data.description.$t%>
-	</div>
+		<div class="photosandinfo">
+
+		<div class="pet-photos-container">
+
+			<% 
+			// variable to count the number of photos (with "x")
+			let photoNum = 1;
+
+			for (let i = 0; i < data.media.photos.photo.length; i++) { 
+
+				// this selects the photos that we want (photos with"x")
+				if (data.media.photos.photo[i]["@size"] === "x") {
+
+					%> 
+
+					<img class="image-overlay hidden animal-picture" id="animal-photo-<%= photoNum %>" src="<%= data.media.photos.photo[i].$t %>">
+					<%
+					photoNum++
+
+				} // end if this is an x  
+
+			} // for 
 
 
+			%>
+		</div>
+			<div id="pet-contact-container">Contact:
+				<li>Phone Number: <%=data.contact.phone.$t%></li>
+				<li>Address: <%=data.contact.address1.$t%></li>
+				<li>City: <%=data.contact.city.$t%></li>
+				<li>Zip: <%=data.contact.zip.$t%></li>
+			</div>
+
+		</div>
+			<button id="left">Previous</button>
+			<button id="right">Next</button>
+			
+		<div id="pet-info-container">Info:
+			<li>Breed: <%=data.breeds.breed.$t%></li>
+			<li>Name: <%=data.name.$t%></li>
+			<li>Sex: <%=data.sex.$t%></li>
+			<li>Id: <%=data.id.$t%></li>
+			<li>Shelter: <%=data.shelterId.$t%></li> <br />
+			<%=data.description.$t%>
+		</div>
+
+
+
+	</div>
+
+	<div>
+		<%= saveAlert %>
+	</div>
+
+	<div class="save-this-pet">
+
+		<form action="/view/pet/<%= data.id.$t %>" method="POST">
+			<input type="hidden" name="id" value="<%= data.id.$t %>">
+			<input type="hidden" name="shelterId" value="<%= data.shelterId.$t %>">
+			<input type="hidden" name="name" value="<%= data.name.$t %>">
+			<input type="hidden" name="photo" value="<%= data.media.photos.photo[2].$t %>">
+			<input type="hidden" name="age" value="<%= data.age.$t %>">
+			<input type="hidden" name="animal" value="<%= data.animal.$t %>">
+			<input type="hidden" name="breed" value="<%= data.breeds.breed.$t %>">
+			<input type="hidden" name="sex" value="<%= data.sex.$t %>">
+			<button>Save this pet</button>
+		</form>
+
+	</div>
+
+	</main>
+
+	<% include ./partials/footer.ejs %>
 
 </div>
-
-<div>
-	<%= saveAlert %>
-</div>
-
-<form action="/view/pet/<%= data.id.$t %>" method="POST">
-	<input type="hidden" name="id" value="<%= data.id.$t %>">
-	<input type="hidden" name="shelterId" value="<%= data.shelterId.$t %>">
-	<input type="hidden" name="name" value="<%= data.name.$t %>">
-	<input type="hidden" name="photo" value="<%= data.media.photos.photo[2].$t %>">
-	<input type="hidden" name="age" value="<%= data.age.$t %>">
-	<input type="hidden" name="animal" value="<%= data.animal.$t %>">
-	<input type="hidden" name="breed" value="<%= data.breeds.breed.$t %>">
-	<input type="hidden" name="sex" value="<%= data.sex.$t %>">
-	<button>Save this pet</button>
-</form>
-
-<% include ./partials/footer.ejs %>
-
 
 <script type="text/javascript" src="/js/showPhoto.js"></script>
 </body>

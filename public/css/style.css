@@ -249,7 +249,8 @@ input {
 .pets-page-container {
 	/*display: flex;*/
 	/*flex-wrap: wrap;*/
-	height: 600px;
+	margin-top: 20px;
+	height: 570px;
 	width: 800px;
 	overflow-y: scroll;
 	box-shadow: 1px 1px 7px;
@@ -259,7 +260,7 @@ input {
 	margin-right: auto;
 }
 
-span {
+.name-container span {
 	display: inline-block;
 	text-align: center;
 	font-family: Josefin Sans;
@@ -268,6 +269,12 @@ span {
 	border-style: outset;
 	margin: 5px;
 
+}
+
+.save-this-pet {
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 10px;
 }
 
 .name-container {
