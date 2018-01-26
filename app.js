@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const methodOverride = require('method-override')
 
+require('dotenv').config()
 
 //database
 require('./db/db.js');
@@ -430,8 +431,8 @@ app.get('*', (req, res) => {
 	res.send('404 page not found');
 })
 
+const port = process.env.PORT || 3000;
 
-
-app.listen(3000, () => {
+app.listen(port, () => {
 	console.log('now listening on port 3000')
 })

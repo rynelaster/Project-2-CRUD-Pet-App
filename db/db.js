@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/petfinder');
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/petfinder';
+
+mongoose.connect(mongoUri);
 
 mongoose.connection.once('open', (req, res) => {
 	console.log('db connection open');
