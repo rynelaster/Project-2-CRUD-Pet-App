@@ -270,18 +270,29 @@ app.get('/view/pet/:id', (req, res)=>{
 	request('http://api.petfinder.com/pet.get?format=json&key=4514687905f37186817bdb9967ab8c9f&id=' + req.params.id, (err, response, foundAnimal) => {
 
 		const json = JSON.parse(foundAnimal);
-		// console.log(json);
 
-		console.log(json.petfinder.pet)
+		if (json.petfinder.pet == undefined) {
 
-		res.render('showPet.ejs', {
+			req.session.errlocation = 'There was an error obtaining shelter records. Please start a new search :(';
 
-			data: json.petfinder.pet,
-			saveAlert: req.session.saveAlert,
-			location: req.session.location,
-			logged: req.session.logged,
-			username: req.session.username
-		})
+			res.redirect('/')
+		}
+		else {
+			// console.log(foundAnimal);
+
+			// res.send(json.petfinder)
+
+			res.render('showPet.ejs', {
+
+				data: json.petfinder.pet,
+				saveAlert: req.session.saveAlert,
+				location: req.session.location,
+				logged: req.session.logged,
+				username: req.session.username
+			})
+		}
+
+	
 	})
 })
 
