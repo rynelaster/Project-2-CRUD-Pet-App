@@ -19,6 +19,12 @@
 		<h1>Your saved pet profiles:</h1>
 
 		<div class="saved-pet-container">
+
+			<% if (saved.length == 0) { %>
+
+			<div class="no-saved"> Looks like you don't have any saved pets! Better get <a href="/">searching!</a> </div>
+
+			<% } %>
 			
 			<% for (let i = 0; i < saved.length; i++) { -%>
 				

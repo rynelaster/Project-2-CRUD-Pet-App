@@ -117,7 +117,7 @@ app.post('/results/search', (req, res) => {
 			}
 			else {
 
-				req.session.location = '';
+				req.session.location = null;
 
 				req.session.errlocation = 'Your location is invalid. Please enter a valid location.'
 
@@ -327,14 +327,25 @@ app.get('/shelter/search', (req, res) => {
 		else {
 
 			const json = JSON.parse(foundShelters);
-			// res.send(json.petfinder);
-			res.render('shelterResults.ejs', {
 
-				shelters: json.petfinder.shelters,
-				location: req.session.location,
-				logged: req.session.logged,
-				username: req.session.username
-			})
+			if (json.petfinder.shelters == undefined) {
+
+				req.session.errlocation = 'Your location is invalid. Please enter a valid location.'
+
+				req.session.location = null;
+
+				res.redirect('/');
+			}
+			else {
+
+				res.render('shelterResults.ejs', {
+
+					shelters: json.petfinder.shelters,
+					location: req.session.location,
+					logged: req.session.logged,
+					username: req.session.username
+				})
+			}
 		}
 	})
 })

@@ -8,17 +8,18 @@ const User = require('../models/users.js');
 
 router.get('/', (req, res) => {
 
-	SavedPets.find({}, (err, allSaved) => {
+	User.findOne({username: req.session.username}, (err, foundUser) => {
+
+		// console.log(foundUser);
 
 		res.render('savedPets.ejs', {
-			
-			saved: allSaved,
+
+			saved: foundUser.savedPets,
 			location: req.session.location,
 			logged: req.session.logged,
 			username: req.session.username
 		})
 	})
-
 })
 
 
