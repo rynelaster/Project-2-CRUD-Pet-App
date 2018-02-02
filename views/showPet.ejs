@@ -68,15 +68,15 @@
 			<%=data.description.$t%>
 		</div>
 
-
-
 	</div>
 
-	<div>
-		<%= saveAlert %>
-	</div>
+	<% if (logged) { %>
 
 	<div class="save-this-pet">
+
+		<div>
+			<%= saveAlert %>
+		</div>
 
 		<form action="/view/pet/<%= data.id.$t %>" method="POST">
 			<input type="hidden" name="id" value="<%= data.id.$t %>">
@@ -91,6 +91,8 @@
 		</form>
 
 	</div>
+
+	<% } %>
 
 	</main>
 

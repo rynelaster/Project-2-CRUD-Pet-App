@@ -213,6 +213,9 @@ input {
 .shelter-contact-info {
 	font-size: 12px;
 }
+#no-pets {
+	margin: 10px;
+}
 
 
 /* login */
