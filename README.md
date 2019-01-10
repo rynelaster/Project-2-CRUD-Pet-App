@@ -1,5 +1,4 @@
 # Find-ur-pet-CRUD-Pet-App
-### This is Project 2 for General Assembly's Web Development Immersive program, developed by Michael Weber and Ryne Laster.
 
 
 ***

@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 const User = require('../models/users.js');
 
 
-
 //login route to render the page
 router.get('/login', (req, res)=>{
 
@@ -96,13 +95,6 @@ router.post('/registration', (req, res)=>{
 		res.redirect('/');
 	})
 })
-
-
-
-
-
-
-
 
 
 module.exports = router;

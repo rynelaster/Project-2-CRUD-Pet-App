@@ -1,6 +1,6 @@
-/** {
-	border: 1px solid black;
-}*/
+* {
+	box-sizing: border-box;
+}
 html {
 	height: 100%;
 }
@@ -26,7 +26,13 @@ input {
 }
 
 
-/* home.ejs */
+/*
+*
+*
+* * * HOME * * *
+*
+*
+*/
 .splash-container {
 	z-index: -1;
 	height: 400px;
@@ -72,7 +78,13 @@ input {
 	margin-bottom: 10px;
 }
 
-/* refine */
+/*
+*
+*
+* * * RESULTS * * *
+*
+*
+*/
 .pet-type {
 	margin: 0 auto;
 	text-align: center;
@@ -85,7 +97,13 @@ input {
 	border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
-/* search */
+/*
+*
+*
+* * * SEARCH * * *
+*
+*
+*/
 .search-form {
 	margin: 0 auto;
 	margin-top: 200px;
@@ -100,7 +118,13 @@ input {
 	margin-top: 10px;
 }
 
-/* results */
+/*
+*
+*
+* * * RESULTS * * *
+*
+*
+*/
 .prev-next-container {
 	display: flex;
 	justify-content: center;
@@ -170,7 +194,13 @@ input {
 	margin: 50px;
 }
 
-/* shelter results */
+/*
+*
+*
+* * * SHELTER RESULTS * * *
+*
+*
+*/
 .shelter-results-container {
 	margin: 0 auto;
 	margin-top: 20px;
@@ -218,7 +248,13 @@ input {
 }
 
 
-/* login */
+/*
+*
+*
+* * * LOGIN * * *
+*
+*
+*/
 .login-form {
 	margin: 0 auto;
 	margin-top: 200px;
@@ -233,7 +269,13 @@ input {
 	margin-bottom: 5px;
 }
 
-/* register */
+/*
+*
+*
+* * * REGISTER * * *
+*
+*
+*/
 .register-form {
 	margin: 0 auto;
 	margin-top: 200px;
@@ -248,33 +290,37 @@ input {
 	margin-bottom: 5px;
 }
 
-/*Show Pets Page */
+
+/*
+*
+*
+* * * SHOW PET PAGE * * *
+*
+*
+*/
 .pets-page-container {
-	/*display: flex;*/
-	/*flex-wrap: wrap;*/
 	margin-top: 20px;
 	height: 570px;
 	width: 800px;
-	overflow-y: scroll;
 	box-shadow: 1px 1px 7px;
-	background-color: white;
-	/*justify-content: flex-start;*/
+	background-image: url('../img/resultsbg.jpg');
 	margin-left: auto; 
 	margin-right: auto;
 }
 
-.name-container a {
-	display: inline-block;
+.name-container {
 	text-align: center;
-	font-family: Josefin Sans;
-	font-size: 40px;
-	padding : 15px;
-	border-style: outset;
-	margin: 5px;
+	font-size: 48px;
+	margin: 4px;
 	color: black;
-
 }
 
+.photos-and-info {
+	margin: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
 
 .save-this-pet {
 	margin: 0 auto;
@@ -286,54 +332,91 @@ input {
 	text-align: center;
 }
 
-.pet-detail-container{
-	display: inline-block;
-	width: 400px;
+.pet-details {
+	flex: 1 0 auto;
+}
+
+.updated {
+	font-family: Georgia, serif;
+	border-top: 1px solid black;
+	margin-bottom: 3px;
+	padding-top: 3px;
+}
+
+.availability {
+	font-style: bold;
 }
 
 .pet-photos-container {
-	/*vertical-align: top;*/
-	display: inline-block;
-	height: 275px;
-	width: 390px; 
+	flex: 1 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	border: rgba(0, 0, 0, 0.3);
+	width: 250px;
+	height: 300px;
+	margin: 10px;
+	background-image: url('../img/resultsbg.jpg');
 	text-align: center;
-	/*border: 1px solid;*/
-
+	box-shadow: 1px 1px 7px;
+}
+.pet-photos-overflow {
+	margin: 6px auto;
+	height: 100%;
+	width: 90%;
+	overflow: hidden;
 }
 .pet-photos-container img {
+	border: 1px solid rgba(0, 0, 0, 0.2);
 	max-width: 100%;
 	height: auto;
 	max-height: 100%;
 	vertical-align: top;
+}
 
+.photo-button-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+.photo-button-container button { 
+	margin-bottom: 6px;
+}
+
+.pet-description {
+	margin: 10px;
+	font-family: Georgia, Cambria, serif;
 }
 
 #pet-info-container{
-	padding: 10px;
-	font-family: Georgia;
-	/*border: 1px solid;*/
+	font-family: Georgia, serif;
+	border-top: 1px solid black;
 }
+#pet-info-container p { margin: 0; }
 
 #pet-contact-container {
-	vertical-align: top;
-	display: inline-block;
-	width: 380px;
-	padding: 10px;
 	font-family: Georgia;
-	/*border: 1px solid;*/
-	font-size: 22px;
-	text-align: center;
+	border-top: 1px solid black;
+	padding-bottom: 3px;
 }
 
-
-
+.info-miniheader {
+	font-family: Boogaloo;
+	font-size: 24px;
+}
 
 .hidden {
 	display: none;
 }
 
 
-/* show shelter page */
+/*
+*
+*
+* * * SHOW SHELTER PAGE * * *
+*
+*
+*/
 .shelter-container {
 	border: 1px solid rgba(0, 0, 0, 0.5);
 	margin: 0 auto;
@@ -355,20 +438,21 @@ input {
 	width: 495px;
 }
 .shelter-view-name {
-	font-size: 52px;
+	font-size: 46px;
 	line-height: 90%;
-	margin: 2px;
+	margin: 4px;
+	text-align: center;
 }
 .shelter-view-address {
 	font-family: 'Georgia';
 	font-size: 18px;
-	margin: 2px;
+	margin: 4px;
 	border-top: 1px black solid;
 }
 .shelter-view-contact {
 	font-family: 'Georgia';
 	font-size: 18px;
-	margin: 2px;
+	margin: 4px;
 	border-top: 1px black solid;
 	border-bottom: 1px black solid;
 }
@@ -386,6 +470,7 @@ input {
 	overflow-y: scroll;
 	margin-left: 15px;
 	margin-bottom: 15px;
+	background-color: white;
 }
 .show-a-pet-results {
 	border: 1px solid black;
@@ -416,7 +501,13 @@ input {
 }
 
 
-/* saved pets view */
+/*
+*
+*
+* * * SAVED PETS VIEW * * *
+*
+*
+*/
 .saved-pet-container {
 	margin: 0 auto;
 	margin-top: 10px;
@@ -477,7 +568,13 @@ input {
 }
 
 
-/* header */
+/*
+*
+*
+* * * HEADER * * *
+*
+*
+*/
 #header {
 	padding-top: 10px;
 	margin-bottom: 10px;
@@ -515,14 +612,18 @@ h1 a:hover {
 }
 
 
-/* all container for footer to work */
+/*
+*
+*
+* * * FOOTER * * *
+*
+*
+*/
 #all-container {
 	min-height: 100%;
    	position: relative;
 }
 
-
-/* footer */
 #footer {
 	text-align: center;
 	background-color: #FFC8FB;
@@ -539,7 +640,13 @@ h1 a:hover {
 }
 
 
-/* body */
+/*
+*
+*
+* * * BODY * * *
+*
+*
+*/
 #body {
 	padding-bottom: 60px;
 }

@@ -47,8 +47,6 @@ const User = require('./models/users.js')
 //home page route uses the get random pet method of the petfinder api to populate our landing page
 app.get('/', (req, res) => {
 
-	console.log(req.session.location)
-
 	req.session.message = '';
 
 	req.session.saveAlert = '';
@@ -274,7 +272,7 @@ app.get('/view/pet/:id', (req, res)=>{
 
 		if (json.petfinder.pet == undefined) {
 
-			req.session.errlocation = 'There was an error obtaining shelter records. Please start a new search :(';
+			req.session.errlocation = 'There was an error obtaining shelter records. Please start a new search ☹';
 
 			res.redirect('/')
 		}
@@ -305,8 +303,6 @@ app.post('/view/pet/:id', (req, res) => {
 
 		const json = JSON.parse(foundAnimal);
 		// console.log(json);
-
-		console.log(req.body)
 
 		User.findOne({
 

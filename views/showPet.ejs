@@ -10,7 +10,7 @@
 <body>
 
 <div id="all-container">
-
+	
 	<% include ./partials/header.ejs %>
 
 	<main id="body">
@@ -18,55 +18,72 @@
 	<% include ./partials/location.ejs %>
 
 	<div class="pets-page-container">
-		<div class="name-container">
-			<a href="/view/shelter/<%=data.shelterId.$t%>" class="name"> <%=data.name.$t%> </a>
-		</div>
 
-		<div class="photosandinfo">
+		<div class="photos-and-info">
 
-		<div class="pet-photos-container">
+			<div class="pet-photos-container">
+				<div class="pet-photos-overflow">
+					<% 
+					// variable to count the number of photos (with "x")
+					let photoNum = 1;
 
-			<% 
-			// variable to count the number of photos (with "x")
-			let photoNum = 1;
+					for (let i = 0; i < data.media.photos.photo.length; i++) { 
 
-			for (let i = 0; i < data.media.photos.photo.length; i++) { 
+						// this selects the photos that we want (photos with"x")
+						if (data.media.photos.photo[i]["@size"] === "x") {
 
-				// this selects the photos that we want (photos with"x")
-				if (data.media.photos.photo[i]["@size"] === "x") {
+							%> 
 
-					%> 
+							<img class="image-overlay hidden animal-picture" id="animal-photo-<%= photoNum %>" src="<%= data.media.photos.photo[i].$t %>">
+							<%
+							photoNum++
 
-					<img class="image-overlay hidden animal-picture" id="animal-photo-<%= photoNum %>" src="<%= data.media.photos.photo[i].$t %>">
-					<%
-					photoNum++
+						} // end if this is an x  
 
-				} // end if this is an x  
-
-			} // for 
+					} // for 
 
 
-			%>
-		</div>
-			<div id="pet-contact-container">Contact:
-				<li>Phone Number: <%=data.contact.phone.$t%></li>
-				<li>Address: <%=data.contact.address1.$t%></li>
-				<li>City: <%=data.contact.city.$t%></li>
-				<li>Zip: <%=data.contact.zip.$t%></li>
+					%>
+				</div>
+
+				<div class="photo-button-container">
+					<button id="left">Prev</button>
+					<button id="right">Next</button>
+				</div>
+
+			</div>
+
+			<div class="pet-details">
+
+				<div class="name-container">
+					<%=data.name.$t%>
+				</div>
+
+				<div class="pet-update">
+					<div class="updated">This pet's information was last updated <%= data.lastUpdate.$t.slice(0, 10) %>.</div>
+					<div class="updated">
+						<%= data.name.$t %> is <strong class="availablility"><% if (data.status.$t === 'A') { %> available <% } else { %> unavailable <% } %></strong> according to Petfinder's database.
+					</div>
+				</div>
+
+				<div id="pet-contact-container">
+					<a class="info-miniheader" href='/view/shelter/<%= data.shelterId.$t %>'>Visit this shelter's page</a>
+					<div>Phone Number: <%=data.contact.phone.$t%></div>
+					<div>Address: <%=data.contact.address1.$t%></div>
+					<div>City/State: <%=data.contact.city.$t%>, <%= data.contact.state.$t %></div>
+					<div>Zip: <%=data.contact.zip.$t%></div>
+				</div>
+
+				<div id="pet-info-container">
+					<div class="info-miniheader">Database details:</div>
+					<p><%= data.name.$t %> is <% if (data.age.$t == 'Adult') { %> an <% } else { %> a <% } %> <%= data.age.$t.toLowerCase() %> <%= data.animal.$t.toLowerCase() %>.</p>
+				</div>
+
 			</div>
 
 		</div>
-			<button id="left">Previous</button>
-			<button id="right">Next</button>
-			
-		<div id="pet-info-container">Info:
-			<li>Breed: <%=data.breeds.breed.$t%></li>
-			<li>Name: <%=data.name.$t%></li>
-			<li>Sex: <%=data.sex.$t%></li>
-			<li>Id: <%=data.id.$t%></li>
-			<li>Shelter: <%=data.shelterId.$t%></li> <br />
-			<%=data.description.$t%>
-		</div>
+
+		<p class="pet-description"><%=data.description.$t%></p>
 
 	</div>
 
